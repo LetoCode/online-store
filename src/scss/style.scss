@@ -1,8 +1,18 @@
-@import "_nullstyle";
-@import "header";
-@import "_footer";
-
+@import "base/nullstyle";
 @import url("https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+// Abstract
+@import "abstarct/constants";
+@import "abstarct/mixins";
+
+// Layouts
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/main";
+
+// Components
+@import "components/filters";
+@import "components/products";
 
 body {
    background: url(../assets/bg/bg.jpg) 0 0 / cover no-repeat;
