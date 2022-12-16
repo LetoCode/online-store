@@ -1,4 +1,4 @@
-export interface Goods {
+export interface Products {
     id: number;
     title: string;
     description: string;
@@ -10,4 +10,12 @@ export interface Goods {
     category: string;
     thumbnail: string;
     images: string[];
+}
+
+export interface SearchParameters {
+    category?: string;
+    price?: string;
+    search?: string;
+    brand?: string;
+    stock?: string;
 }
