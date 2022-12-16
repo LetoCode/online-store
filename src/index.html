@@ -28,7 +28,54 @@
       </header>
       <main class="main">
          <div class="main__container">
-            <div class="filters"></div>
+            <div class="filters">
+               <div class="filters__buttons filters-buttons">
+                  <button type="button" class="filters-buttons__btn" id="btn-reset-filters">Reset Filters</button>
+                  <button type="button" class="filters-buttons__btn" id="btn-copy-link">Copy Link</button>
+               </div>
+               <div class="filters__container filter-container">
+                  <div class="filter-container__block filter-container__block_category filter-block">
+                     <h3 class="filter-block__header">Category</h3>
+                     <div class="filter-block__body"></div>
+                  </div>
+                  <div class="filter-container__block filter-container__block_brand filter-block">
+                     <h3 class="filter-block__header">Brand</h3>
+                     <div class="filter-block__body"></div>
+                  </div>
+                  <div class="filter-container__block filter-container__block_price filter-block">
+                     <h3 class="filter-block__header">Price</h3>
+                     <div class="filter-block__body range">
+                        <div class="range__container">
+                           <div class="range__container__labels range-labels">
+                              <div class="range-labels__min">1</div>
+                              <div class="range-labels__between">⟷</div>
+                              <div class="range-labels__max">2</div>
+                           </div>
+                           <div class="range__container__control">
+                              <input type="range" id="fromSlider" value="0" min="0" max="100">
+                              <input type="range" id="toSlider" value="100" min="0" max="100">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="filter-container__block filter-container__block_stock filter-block">
+                     <h3 class="filter-block__header">Stock</h3>
+                     <div class="filter-block__body">
+                        <div class="range__container">
+                           <div class="range__container__labels range-labels">
+                              <div class="range-labels__min">1</div>
+                              <div class="range-labels__between">⟷</div>
+                              <div class="range-labels__max">2</div>
+                           </div>
+                           <div class="range__container__control">
+                              <input type="range" id="fromSlider" value="0" min="0" max="100">
+                              <input type="range" id="toSlider" value="100" min="0" max="100">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <div class="products"></div>
          </div>
       </main>

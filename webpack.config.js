@@ -24,6 +24,10 @@ const baseConfig = {
                 type: 'asset/resource',
             },
             {
+                test: /\.(json)$/i,
+                type: 'json',
+            },
+            {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
             },
