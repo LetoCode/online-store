@@ -5,6 +5,9 @@
 @import "abstarct/constants";
 @import "abstarct/mixins";
 
+//Base
+@import "base/buttons";
+
 // Layouts
 @import "layouts/header";
 @import "layouts/footer";
@@ -15,7 +18,7 @@
 @import "components/products";
 
 body {
-   background: url(../assets/bg/bg.jpg) 0 0 / cover no-repeat;
+   background: url(../assets/bg/bg.jpg) 0 0 / cover no-repeat fixed;
    color: orange;
    font-family: Philosopher, sans-serif;
    font-size: 14px;

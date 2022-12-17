@@ -1,5 +1,6 @@
 import '../scss/style.scss';
 import products from './products.json';
+import './products-grid';
 
 window.onload = windowLoad;
 
