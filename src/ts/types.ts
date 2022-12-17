@@ -12,6 +12,11 @@ export interface Products {
     images: string[];
 }
 
+export interface categories {
+    category: string;
+    amount: number;
+}
+
 export interface SearchParameters {
     category?: string;
     price?: string;
@@ -19,3 +24,5 @@ export interface SearchParameters {
     brand?: string;
     stock?: string;
 }
+
+export type FilterInfo = number | string[] | Map<string, number>;
