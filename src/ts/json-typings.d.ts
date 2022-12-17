@@ -1,4 +1,6 @@
+import { Products } from './types';
+
 declare module '*.json' {
-    const value: any;
+    const value: Products[];
     export default value;
 }

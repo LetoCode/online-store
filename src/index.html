@@ -36,24 +36,24 @@
                <div class="filters__container filter-container">
                   <div class="filter-container__block filter-container__block_category filter-block">
                      <h3 class="filter-block__header">Category</h3>
-                     <div class="filter-block__body"></div>
+                     <div class="filter-block__body" id="category-filter"></div>
                   </div>
                   <div class="filter-container__block filter-container__block_brand filter-block">
                      <h3 class="filter-block__header">Brand</h3>
-                     <div class="filter-block__body"></div>
+                     <div class="filter-block__body" id="brand-filter"></div>
                   </div>
                   <div class="filter-container__block filter-container__block_price filter-block">
                      <h3 class="filter-block__header">Price</h3>
                      <div class="filter-block__body range">
                         <div class="range__container">
                            <div class="range__container__labels range-labels">
-                              <div class="range-labels__min">1</div>
+                              <div class="range-labels__min" id="min-price">1</div>
                               <div class="range-labels__between">⟷</div>
-                              <div class="range-labels__max">2</div>
+                              <div class="range-labels__max" id="max-price">100</div>
                            </div>
                            <div class="range__container__control">
-                              <input type="range" id="fromSlider" value="0" min="0" max="100">
-                              <input type="range" id="toSlider" value="100" min="0" max="100">
+                              <input type="range" id="fromSlider-price" value="0" min="0" max="100">
+                              <input type="range" id="toSlider-price" value="100" min="0" max="100">
                            </div>
                         </div>
                      </div>
@@ -63,13 +63,13 @@
                      <div class="filter-block__body">
                         <div class="range__container">
                            <div class="range__container__labels range-labels">
-                              <div class="range-labels__min">1</div>
+                              <div class="range-labels__min" id="min-stock">1</div>
                               <div class="range-labels__between">⟷</div>
-                              <div class="range-labels__max">2</div>
+                              <div class="range-labels__max" id="max-stock">100</div>
                            </div>
                            <div class="range__container__control">
-                              <input type="range" id="fromSlider" value="0" min="0" max="100">
-                              <input type="range" id="toSlider" value="100" min="0" max="100">
+                              <input type="range" id="fromSlider-stock" value="0" min="0" max="100">
+                              <input type="range" id="toSlider-stock" value="100" min="0" max="100">
                            </div>
                         </div>
                      </div>
