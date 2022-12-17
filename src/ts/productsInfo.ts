@@ -14,6 +14,7 @@ export function getProductsWithParams(urlSearchParams: URLSearchParams): Product
     //       return el[key] === value;
     //    })
     // });
+    // console.log(productsArray);
     return productsArray;
 }
 

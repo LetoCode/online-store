@@ -4,6 +4,9 @@ export function showCategoryFilter(namesSet: string[], mapCurrentCount: Map<stri
     namesSet.forEach((element) => {
         const inputContainer: HTMLElement = document.createElement('div');
         inputContainer.classList.add('filter-block__body__element');
+        inputContainer.classList.add('route_filter');
+        inputContainer.setAttribute('data-filter-key', 'category');
+        inputContainer.setAttribute('data-filter-value', element);
 
         const elContainer: HTMLElement = document.createElement('div');
         elContainer.classList.add('element__input');
@@ -51,6 +54,9 @@ export function showBrandsFilter(namesSet: string[], mapCurrentCount: Map<string
     namesSet.forEach((element) => {
         const inputContainer: HTMLElement = document.createElement('div');
         inputContainer.classList.add('filter-block__body__element');
+        inputContainer.classList.add('route_filter');
+        inputContainer.setAttribute('data-filter-key', 'brand');
+        inputContainer.setAttribute('data-filter-value', element);
 
         const elContainer: HTMLElement = document.createElement('div');
         elContainer.classList.add('element__input');

@@ -4,10 +4,14 @@ import { getAllProducts, getProductsWithParams, getCurrentFilterInfo } from './p
 import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter } from './appView';
 import products from './products.json';
 import './products-grid';
+import { handleLocation } from './routing';
+import './checkBoxFilters';
+import './rangeFilters';
 
 let productsArrayRaw: Products[];
 
-window.onload = windowLoad;
+window.addEventListener('load', windowLoad);
+window.addEventListener('popstate', handleLocation);
 
 function windowLoad(): void {
     productsArrayRaw = getAllProducts();
