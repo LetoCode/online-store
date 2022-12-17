@@ -2,6 +2,8 @@ import '../scss/style.scss';
 import { Products } from './types';
 import { getAllProducts, getProductsWithParams, getCurrentFilterInfo } from './productsInfo';
 import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter } from './appView';
+import products from './products.json';
+import './products-grid';
 
 let productsArrayRaw: Products[];
 
