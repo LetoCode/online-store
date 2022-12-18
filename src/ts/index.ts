@@ -1,37 +1,32 @@
 import '../scss/style.scss';
-import { Products } from './types';
-import { getAllProducts, getProductsWithParams, getCurrentFilterInfo } from './productsInfo';
-import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter } from './appView';
-import products from './products.json';
 import './products-grid';
+import './filterCheckBoxChange';
+import './filtersSliderChange';
+import { updateProducts, renderAllFilers, updateFiltersView } from './filtering';
 import { handleLocation } from './routing';
-import './checkBoxFilters';
-import './rangeFilters';
-
-let productsArrayRaw: Products[];
 
 window.addEventListener('load', windowLoad);
-window.addEventListener('popstate', handleLocation);
 
 function windowLoad(): void {
-    productsArrayRaw = getAllProducts();
-    const search: string = window.location.search;
-    const urlSearchParams: URLSearchParams = new URLSearchParams(search);
-    const productsArray = getProductsWithParams(urlSearchParams);
-    const [
-        categoriesNamesSet,
-        brandsNamesSet,
-        minPrice,
-        maxPrice,
-        minStock,
-        maxStock,
-        categoriesMapCurrentCount,
-        brandsMapCurrentCount,
-    ] = getCurrentFilterInfo(productsArray);
+    renderAllFilers();
+    updateFiltersView();
+    updateProducts();
+    addListeners();
+}
 
-    showCategoryFilter(categoriesNamesSet as string[], categoriesMapCurrentCount as Map<string, number>);
-    showBrandsFilter(brandsNamesSet as string[], brandsMapCurrentCount as Map<string, number>);
-    showPriceFilter(minPrice as number, maxPrice as number);
-    showStockFilter(minStock as number, maxStock as number);
-    // const path: any = window.location.pathname;
+function addListeners() {
+    const btnResetFilters: HTMLElement = document.getElementById('btn-reset-filters')!;
+    btnResetFilters.addEventListener('click', (event) => {
+        const firstURL: string = window.location.href.split('?')[0];
+        window.history.pushState({}, '', firstURL);
+        updateProducts();
+        updateFiltersView();
+    });
+
+    const productsItems: HTMLElement = document.querySelector('.products__items')!;
+    productsItems.addEventListener('click', (event) => {
+        if ((event.target as HTMLElement).closest('.btn__details')) {
+            handleLocation(event);
+        }
+    });
 }
