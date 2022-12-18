@@ -1,21 +1,40 @@
 import products from './products.json';
 import { Products } from './types';
+import { productsArrayRaw } from './filtering';
 
-export function getAllProducts() {
+export function getAllProducts(): Products[] {
     return Object.values(products)[0];
 }
 
-export function getProductsWithParams(urlSearchParams: URLSearchParams): Products[] {
-    let productsArray: Products[];
+export function getProductsWithParams(key: string, value: string[], products: Products[]): Products[] {
+    let result: Products[];
+    if (products.length === 0) {
+        products = productsArrayRaw;
+    }
 
-    productsArray = getAllProducts();
-    // urlSearchParams.forEach((value, key) => {
-    //    productsArray = productsArrayRaw.filter(el => {
-    //       return el[key] === value;
-    //    })
-    // });
-    // console.log(productsArray);
-    return productsArray;
+    if (key === 'price' || key === 'stock') {
+        const minValue: number = +value[0];
+        const maxValue: number = +value[1];
+        console.log(value);
+        console.log(minValue);
+        console.log(maxValue);
+        result = products.filter((el) => {
+            if (
+                (el[key as keyof Products] as number) >= minValue &&
+                (el[key as keyof Products] as number) <= maxValue
+            ) {
+                return el;
+            }
+        });
+    } else {
+        result = products.filter((el) => {
+            if (value.includes(el[key as keyof Products] as string)) {
+                return el;
+            }
+        });
+    }
+
+    return result;
 }
 
 export function getCurrentFilterInfo(productsArray: Products[]) {
@@ -23,7 +42,6 @@ export function getCurrentFilterInfo(productsArray: Products[]) {
     const brandsNames: string[] = [];
     const prices: number[] = [];
     const stocks: number[] = [];
-    //let categories: Products[];
 
     productsArray.forEach((el) => {
         categoriesNames.push(el.category);

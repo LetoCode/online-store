@@ -1,3 +1,5 @@
+import { updateProducts } from './filtering';
+
 document.getElementById('fromSlider-stock')?.addEventListener('change', inputRangeFilter);
 document.getElementById('toSlider-stock')?.addEventListener('change', inputRangeFilter);
 document.getElementById('fromSlider-price')?.addEventListener('change', inputRangeFilter);
@@ -36,6 +38,7 @@ function inputRangeFilter(event: Event) {
 
     const url = createQueryUrlForRange(key, value);
     window.history.pushState({}, '', url);
+    updateProducts();
 }
 
 function createQueryUrlForRange(key: string, value: string): string {
@@ -50,5 +53,13 @@ function createQueryUrlForRange(key: string, value: string): string {
     }
     params.delete(key);
     params.append(key, value);
-    return `${firstURL}?${params.toString()}`;
+
+    let result: string;
+    if (params.toString().length === 0) {
+        result = firstURL;
+    } else {
+        result = `${firstURL}?${params.toString()}`;
+    }
+
+    return result;
 }

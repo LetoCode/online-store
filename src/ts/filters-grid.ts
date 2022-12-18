@@ -103,12 +103,19 @@ export function showPriceFilter(minPrice: number, maxPrice: number): void {
     const toSliderPrice: HTMLInputElement | null = document.querySelector('#toSlider-price')!;
     const minPriceEl: HTMLElement | null = document.querySelector('#min-price')!;
     const maxPriceEl: HTMLElement | null = document.querySelector('#max-price')!;
+    minPriceEl.textContent = minPrice.toString();
+    maxPriceEl.textContent = maxPrice.toString();
+    fromSliderPrice.setAttribute('min', minPrice.toString());
+    toSliderPrice.setAttribute('min', minPrice.toString());
+    fromSliderPrice.setAttribute('max', maxPrice.toString());
+    toSliderPrice.setAttribute('max', maxPrice.toString());
+    toSliderPrice.value = maxPrice.toString();
 
     fromSliderPrice.addEventListener('input', (event) => {
-        controlFromSlider(event, fromSliderPrice, toSliderPrice, minPrice, maxPrice, minPriceEl, maxPriceEl);
+        controlFromSlider(event, fromSliderPrice, toSliderPrice, minPriceEl, maxPriceEl);
     });
     toSliderPrice.addEventListener('input', (event) => {
-        controlToSlider(event, fromSliderPrice, toSliderPrice, minPrice, maxPrice, minPriceEl, maxPriceEl);
+        controlToSlider(event, fromSliderPrice, toSliderPrice, minPriceEl, maxPriceEl);
     });
 
     setAccess(toSliderPrice, toSliderPrice);
@@ -119,12 +126,19 @@ export function showStockFilter(minStock: number, maxStock: number): void {
     const toSliderStock: HTMLInputElement | null = document.querySelector('#toSlider-stock')!;
     const minStockEl: HTMLElement | null = document.querySelector('#min-stock')!;
     const maxStockEl: HTMLElement | null = document.querySelector('#max-stock')!;
+    minStockEl.textContent = minStock.toString();
+    maxStockEl.textContent = maxStock.toString();
+    fromSliderStock.setAttribute('min', minStock.toString());
+    toSliderStock.setAttribute('min', minStock.toString());
+    fromSliderStock.setAttribute('max', maxStock.toString());
+    toSliderStock.setAttribute('max', maxStock.toString());
+    toSliderStock.value = maxStock.toString();
 
     fromSliderStock.addEventListener('input', (event) => {
-        controlFromSlider(event, fromSliderStock, toSliderStock, minStock, maxStock, minStockEl, maxStockEl);
+        controlFromSlider(event, fromSliderStock, toSliderStock, minStockEl, maxStockEl);
     });
     toSliderStock.addEventListener('input', (event) => {
-        controlToSlider(event, fromSliderStock, toSliderStock, minStock, maxStock, minStockEl, maxStockEl);
+        controlToSlider(event, fromSliderStock, toSliderStock, minStockEl, maxStockEl);
     });
 
     setAccess(toSliderStock, toSliderStock);
@@ -134,8 +148,6 @@ function controlFromSlider(
     event: Event,
     fromSlider: HTMLInputElement,
     toSlider: HTMLInputElement,
-    minValue: number,
-    maxValue: number,
     minEl: HTMLElement,
     maxEl: HTMLElement
 ) {
@@ -150,8 +162,6 @@ function controlToSlider(
     event: Event,
     fromSlider: HTMLInputElement,
     toSlider: HTMLInputElement,
-    minValue: number,
-    maxValue: number,
     minEl: HTMLElement,
     maxEl: HTMLElement
 ) {
