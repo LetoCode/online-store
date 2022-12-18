@@ -3,7 +3,7 @@ import { products } from '../ts/products.json';
 
 const productsItems = document.querySelector('.products__items');
 const productsArrayRaw = Object.values(products);
-
+// console.log(productsArrayRaw);
 // class Product implements Products {
 //     id: number;
 //     title: string;
