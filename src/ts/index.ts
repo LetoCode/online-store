@@ -15,18 +15,22 @@ function windowLoad(): void {
 }
 
 function addListeners() {
-    const btnResetFilters: HTMLElement = document.getElementById('btn-reset-filters')!;
-    btnResetFilters.addEventListener('click', (event) => {
-        const firstURL: string = window.location.href.split('?')[0];
-        window.history.pushState({}, '', firstURL);
-        updateProducts();
-        updateFiltersView();
-    });
+    const btnResetFilters: HTMLElement | null = document.getElementById('btn-reset-filters');
+    if (btnResetFilters) {
+        btnResetFilters.addEventListener('click', () => {
+            const firstURL: string = window.location.href.split('?')[0];
+            window.history.pushState({}, '', firstURL);
+            updateProducts();
+            updateFiltersView();
+        });
+    }
 
-    const productsItems: HTMLElement = document.querySelector('.products__items')!;
-    productsItems.addEventListener('click', (event) => {
-        if ((event.target as HTMLElement).closest('.btn__details')) {
-            handleLocation(event);
-        }
-    });
+    const productsItems: HTMLElement | null = document.querySelector('.products__items');
+    if (productsItems) {
+        productsItems.addEventListener('click', (event) => {
+            if ((event.target as HTMLElement).closest('.btn__details')) {
+                handleLocation(event);
+            }
+        });
+    }
 }

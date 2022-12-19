@@ -15,9 +15,6 @@ export function getProductsWithParams(key: string, value: string[], products: Pr
     if (key === 'price' || key === 'stock') {
         const minValue: number = +value[0];
         const maxValue: number = +value[1];
-        console.log(value);
-        console.log(minValue);
-        console.log(maxValue);
         result = products.filter((el) => {
             if (
                 (el[key as keyof Products] as number) >= minValue &&

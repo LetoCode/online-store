@@ -11,10 +11,11 @@ export function showCategoryFilter(namesSet: string[], mapCurrentCount: Map<stri
         const elContainer: HTMLElement = document.createElement('div');
         elContainer.classList.add('element__input');
 
-        const input: HTMLElement = document.createElement('input');
+        const input: HTMLInputElement = document.createElement('input');
         input.setAttribute('type', 'checkbox');
         input.setAttribute('id', element);
         input.setAttribute('name', element);
+        input.checked = false;
         elContainer.append(input);
 
         const label: HTMLElement = document.createElement('label');
@@ -61,10 +62,11 @@ export function showBrandsFilter(namesSet: string[], mapCurrentCount: Map<string
         const elContainer: HTMLElement = document.createElement('div');
         elContainer.classList.add('element__input');
 
-        const input: HTMLElement = document.createElement('input');
+        const input: HTMLInputElement = document.createElement('input');
         input.setAttribute('type', 'checkbox');
         input.setAttribute('id', element);
         input.setAttribute('name', element);
+        input.checked = false;
         elContainer.append(input);
 
         const label: HTMLElement = document.createElement('label');
@@ -98,59 +100,63 @@ export function showBrandsFilter(namesSet: string[], mapCurrentCount: Map<string
     }
 }
 
-export function showPriceFilter(minPrice: number, maxPrice: number): void {
-    const fromSliderPrice: HTMLInputElement | null = document.querySelector('#fromSlider-price')!;
-    const toSliderPrice: HTMLInputElement | null = document.querySelector('#toSlider-price')!;
-    const minPriceEl: HTMLElement | null = document.querySelector('#min-price')!;
-    const maxPriceEl: HTMLElement | null = document.querySelector('#max-price')!;
-    minPriceEl.textContent = minPrice.toString();
-    maxPriceEl.textContent = maxPrice.toString();
-    fromSliderPrice.setAttribute('min', minPrice.toString());
-    toSliderPrice.setAttribute('min', minPrice.toString());
-    fromSliderPrice.setAttribute('max', maxPrice.toString());
-    toSliderPrice.setAttribute('max', maxPrice.toString());
-    toSliderPrice.value = maxPrice.toString();
+export function showPriceFilter(minPrice: number, maxPrice: number, changeAttributes = true): void {
+    const fromSliderPrice: HTMLInputElement | null = document.querySelector('#fromSlider-price');
+    const toSliderPrice: HTMLInputElement | null = document.querySelector('#toSlider-price');
+    const minPriceEl: HTMLElement | null = document.querySelector('#min-price');
+    const maxPriceEl: HTMLElement | null = document.querySelector('#max-price');
+    if (fromSliderPrice && toSliderPrice && minPriceEl && maxPriceEl) {
+        minPriceEl.textContent = minPrice.toString();
+        maxPriceEl.textContent = maxPrice.toString();
+        if (changeAttributes) {
+            fromSliderPrice.setAttribute('min', minPrice.toString());
+            fromSliderPrice.setAttribute('max', maxPrice.toString());
+        }
+        fromSliderPrice.value = minPrice.toString();
+        if (changeAttributes) {
+            toSliderPrice.setAttribute('min', minPrice.toString());
+            toSliderPrice.setAttribute('max', maxPrice.toString());
+        }
+        toSliderPrice.value = maxPrice.toString();
 
-    fromSliderPrice.addEventListener('input', (event) => {
-        controlFromSlider(event, fromSliderPrice, toSliderPrice, minPriceEl, maxPriceEl);
-    });
-    toSliderPrice.addEventListener('input', (event) => {
-        controlToSlider(event, fromSliderPrice, toSliderPrice, minPriceEl, maxPriceEl);
-    });
-
-    setAccess(toSliderPrice, toSliderPrice);
+        fromSliderPrice.addEventListener('input', () => {
+            controlFromSlider(fromSliderPrice, toSliderPrice, minPriceEl);
+        });
+        toSliderPrice.addEventListener('input', () => {
+            controlToSlider(fromSliderPrice, toSliderPrice, maxPriceEl);
+        });
+    }
 }
 
-export function showStockFilter(minStock: number, maxStock: number): void {
-    const fromSliderStock: HTMLInputElement | null = document.querySelector('#fromSlider-stock')!;
-    const toSliderStock: HTMLInputElement | null = document.querySelector('#toSlider-stock')!;
-    const minStockEl: HTMLElement | null = document.querySelector('#min-stock')!;
-    const maxStockEl: HTMLElement | null = document.querySelector('#max-stock')!;
-    minStockEl.textContent = minStock.toString();
-    maxStockEl.textContent = maxStock.toString();
-    fromSliderStock.setAttribute('min', minStock.toString());
-    toSliderStock.setAttribute('min', minStock.toString());
-    fromSliderStock.setAttribute('max', maxStock.toString());
-    toSliderStock.setAttribute('max', maxStock.toString());
-    toSliderStock.value = maxStock.toString();
+export function showStockFilter(minStock: number, maxStock: number, changeAttributes = true): void {
+    const fromSliderStock: HTMLInputElement | null = document.querySelector('#fromSlider-stock');
+    const toSliderStock: HTMLInputElement | null = document.querySelector('#toSlider-stock');
+    const minStockEl: HTMLElement | null = document.querySelector('#min-stock');
+    const maxStockEl: HTMLElement | null = document.querySelector('#max-stock');
+    if (fromSliderStock && toSliderStock && minStockEl && maxStockEl) {
+        minStockEl.textContent = minStock.toString();
+        maxStockEl.textContent = maxStock.toString();
+        if (changeAttributes) {
+            fromSliderStock.setAttribute('min', minStock.toString());
+            fromSliderStock.setAttribute('max', maxStock.toString());
+        }
+        fromSliderStock.value = minStock.toString();
+        if (changeAttributes) {
+            toSliderStock.setAttribute('min', minStock.toString());
+            toSliderStock.setAttribute('max', maxStock.toString());
+        }
+        toSliderStock.value = maxStock.toString();
 
-    fromSliderStock.addEventListener('input', (event) => {
-        controlFromSlider(event, fromSliderStock, toSliderStock, minStockEl, maxStockEl);
-    });
-    toSliderStock.addEventListener('input', (event) => {
-        controlToSlider(event, fromSliderStock, toSliderStock, minStockEl, maxStockEl);
-    });
-
-    setAccess(toSliderStock, toSliderStock);
+        fromSliderStock.addEventListener('input', () => {
+            controlFromSlider(fromSliderStock, toSliderStock, minStockEl);
+        });
+        toSliderStock.addEventListener('input', () => {
+            controlToSlider(fromSliderStock, toSliderStock, maxStockEl);
+        });
+    }
 }
 
-function controlFromSlider(
-    event: Event,
-    fromSlider: HTMLInputElement,
-    toSlider: HTMLInputElement,
-    minEl: HTMLElement,
-    maxEl: HTMLElement
-) {
+function controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, minEl: HTMLElement) {
     const [from, to] = getParsed(fromSlider, toSlider);
     if (from > to) {
         fromSlider.value = to.toString();
@@ -158,15 +164,8 @@ function controlFromSlider(
     minEl.textContent = fromSlider.value;
 }
 
-function controlToSlider(
-    event: Event,
-    fromSlider: HTMLInputElement,
-    toSlider: HTMLInputElement,
-    minEl: HTMLElement,
-    maxEl: HTMLElement
-) {
+function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, maxEl: HTMLElement) {
     const [from, to] = getParsed(fromSlider, toSlider);
-    setAccess(toSlider, toSlider);
     if (from <= to) {
         toSlider.value = to.toString();
     } else {
@@ -179,12 +178,4 @@ function getParsed(currentFrom: HTMLInputElement, currentTo: HTMLInputElement): 
     const from: number = parseInt(currentFrom.value, 10);
     const to: number = parseInt(currentTo.value, 10);
     return [from, to];
-}
-
-function setAccess(first: HTMLInputElement, second: HTMLInputElement): void {
-    // if (Number(second.value) <= 0) {
-    //     first.style.zIndex = '2';
-    // } else {
-    //     first.style.zIndex = '0';
-    // }
 }
