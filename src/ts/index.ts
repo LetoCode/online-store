@@ -33,4 +33,16 @@ function addListeners() {
             }
         });
     }
+
+    const btnCopyLink: HTMLElement | null = document.getElementById('btn-copy-link');
+    if (btnCopyLink) {
+        btnCopyLink.addEventListener('click', () => {
+            const url: string = window.location.href;
+            navigator.clipboard.writeText(url);
+            btnCopyLink.setAttribute('title', 'Link has copied!!!');
+            setTimeout(() => {
+                btnCopyLink.removeAttribute('title');
+            }, 2000);
+        });
+    }
 }
