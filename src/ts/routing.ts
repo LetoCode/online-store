@@ -1,20 +1,27 @@
 export function handleLocation(event: Event): void {
-    event.preventDefault();
-    const href: string | null = (event.target as HTMLElement).getAttribute('href');
-    if (href) {
-        const route = routes[href as keyof typeof routes] || routes[404];
-        const html: Node = getHTML(route);
-        const main: HTMLElement | null = document.querySelector('.main');
-        if (main) {
-            main.innerHTML = '';
-            main.appendChild(html);
-            window.history.pushState({}, '', route);
+    console.log('ffff');
+    if (event.target instanceof HTMLElement) {
+        event.preventDefault();
+        const href: string | null = (event.target as HTMLElement).getAttribute('href');
+        if (href) {
+            const route = routes[href as keyof typeof routes] || routes[404];
+            const html: Node = getHTML(route);
+            const main: HTMLElement | null = document.querySelector('.main');
+            if (main) {
+                main.innerHTML = '';
+                main.appendChild(html);
+                window.history.pushState({}, route, route);
+            }
         }
+    } else {
+        console.log(window.location);
     }
 }
 
 const routes = {
     404: 'template404',
+    '404.html': 'template404',
+    '/404.html': 'template404',
     '/': '/index.html',
     '/index.html': '/index.html',
 };
