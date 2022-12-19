@@ -2,10 +2,12 @@ import '../scss/style.scss';
 import './products-grid';
 import './filterCheckBoxChange';
 import './filtersSliderChange';
+import '../assets/.htaccess';
 import { updateProducts, renderAllFilers, updateFiltersView } from './filtering';
 import { handleLocation } from './routing';
 
 window.addEventListener('load', windowLoad);
+window.addEventListener('load', handleLocation);
 
 function windowLoad(): void {
     renderAllFilers();
