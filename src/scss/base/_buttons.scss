@@ -10,6 +10,20 @@
         color: $color-primary;
         text-transform: uppercase;
     }
+
+    &__product-add,
+    &__product-buy {
+        text-transform: uppercase;
+        display: block;
+        padding: 7% 0;
+        background: #9a3535;
+        color: $color-additional;
+        border: 2px solid $color-primary;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        width: 100%;
+        margin: 10px auto;
+    }
 }
 
 a.btn__details {
