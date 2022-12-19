@@ -1,4 +1,4 @@
-import { fillProductDetails } from "./productPage";
+import { fillProductDetails } from './productPage';
 
 export function handleLocation(event: Event): void {
     console.log('ffff');
