@@ -4,21 +4,6 @@ import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter 
 import { showProducts } from './products-grid';
 
 //=============================listen history changes and use filers if they were==================
-// let oldLength: number;
-// listen(window.history.length);
-// oldLength = -1;
-// function listen(currentLength: number) {
-//    if (currentLength != oldLength) {
-//       updateProducts();
-
-//       console.log('routing here225');
-//    }
-
-//    oldLength = window.history.length;
-//    setInterval(function () {
-//       listen(window.history.length);
-//    }, 1000);
-// }
 export const productsArrayRaw: Products[] = getAllProducts();
 
 export function renderAllFilers() {
@@ -37,45 +22,74 @@ export function renderAllFilers() {
 
     showCategoryFilter(categoriesNamesSet as string[], categoriesMapCurrentCount as Map<string, number>);
     showBrandsFilter(brandsNamesSet as string[], brandsMapCurrentCount as Map<string, number>);
-    showPriceFilter(minPrice as number, maxPrice as number);
-    showStockFilter(minStock as number, maxStock as number);
+    showPriceFilter(minPrice as number, maxPrice as number, true);
+    showStockFilter(minStock as number, maxStock as number, true);
 
     showProducts(productsArrayRaw);
 }
 
-export function updateFiltersView() {
+export function updateFiltersView(): void {
     const search: string = window.location.search;
-    console.log('here');
+    const categories: NodeListOf<Element> = document.querySelectorAll(
+        '#category-filter .filter-block__body__element input'
+    );
+    const brands: NodeListOf<Element> = document.querySelectorAll('#brand-filter .filter-block__body__element input');
     if (search) {
         const params: URLSearchParams = new URLSearchParams(search);
         const paramsKeys: string[] = Array.from(params.keys());
         const paramsValues: string[] = Array.from(params.values());
-        // params.forEach((value, key) => {
-        //    if (key !== 'price' && key !== 'stock') { [value, key] = [key, value]; }
 
-        // });
-        const categories: NodeListOf<Element> = document.querySelectorAll(
-            '#category-filter .filter-block__body__element input'
-        )!;
-        const brands: NodeListOf<Element> = document.querySelectorAll(
-            '#brand-filter .filter-block__body__element input'
-        )!;
+        //category
+        if (categories) {
+            for (const el of categories) {
+                if (paramsKeys.includes(el.id) && paramsValues.includes('category')) {
+                    (el as HTMLInputElement).checked = true;
+                } else {
+                    (el as HTMLInputElement).checked = false;
+                }
+            }
+        }
 
-        console.log(categories);
-        for (const el in categories) {
-            if (el in paramsKeys && el in paramsValues) {
-                // (el as HTMLInputElement).checked = true;
-                //console.log(el)
-            } else {
-                // el.checked = false;
+        //brands
+        if (brands) {
+            for (const el of brands) {
+                if (paramsKeys.includes(el.id) && paramsValues.includes('brand')) {
+                    (el as HTMLInputElement).checked = true;
+                } else {
+                    (el as HTMLInputElement).checked = false;
+                }
+            }
+        }
+        //price
+        if (paramsKeys.includes('price')) {
+            const diapason: string | null = params.get('price');
+            if (diapason) {
+                const minValue = +diapason.split('*')[0];
+                const maxValue = +diapason.split('*')[1];
+                showPriceFilter(minValue as number, maxValue as number, false);
+            }
+        }
+        //stock
+        if (paramsKeys.includes('stock')) {
+            const diapason: string | null = params.get('stock');
+            if (diapason) {
+                const minValue = +diapason.split('*')[0];
+                const maxValue = +diapason.split('*')[1];
+                showStockFilter(minValue as number, maxValue as number, false);
             }
         }
     } else {
+        for (const el of categories) {
+            (el as HTMLInputElement).checked = false;
+        }
+        for (const el of brands) {
+            (el as HTMLInputElement).checked = false;
+        }
         renderAllFilers();
     }
 }
 
-export function updateProducts() {
+export function updateProducts(): void {
     const search: string = window.location.search;
     if (search) {
         let filteredProducts: Products[] = productsArrayRaw;
