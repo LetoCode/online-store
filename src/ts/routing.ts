@@ -1,35 +1,62 @@
 import { fillProductDetails } from './productPage';
+import { renderAllFilters } from './filtering';
+import { windowLoad } from '.';
 
 export function handleLocation(event: Event): void {
-    console.log('ffff');
-    if (event.target instanceof HTMLElement) {
+    renderAllFilters();
+
+    const search: string = window.location.search;
+    if (search) {
+        const html: Node = getHTML('index');
+        const main: HTMLElement | null = document.querySelector('.main');
+        if (main) {
+            main.innerHTML = '';
+            main.appendChild(html);
+            windowLoad();
+        }
+    } else {
+        let href;
+        if (event.target instanceof HTMLAnchorElement) {
+            href = event.target.href;
+            //console.log('href1:>', href);
+        } else {
+            href = window.location.pathname;
+            //console.log('href2:>', window.location);
+        }
+
+        window.history.pushState({}, '', href);
         event.preventDefault();
-        const href: string | null = (event.target as HTMLElement).getAttribute('href');
+        event.stopImmediatePropagation();
+
         if (href) {
-            // const route = routes[href as keyof typeof routes] || routes[404];
-            const route = routes[href as keyof typeof routes] || routes['details'];
+            const route = getRoute(href);
             const html: Node = getHTML(route);
             const main: HTMLElement | null = document.querySelector('.main');
             if (main) {
                 main.innerHTML = '';
                 main.appendChild(html);
-                window.history.pushState({}, route, route);
-                fillProductDetails(href);
+                if (href.includes('id=')) {
+                    fillProductDetails(href);
+                }
+                if (route === 'index') {
+                    windowLoad();
+                }
             }
         }
-    } else {
-        console.log(window.location);
     }
 }
 
-const routes = {
-    404: 'template404',
-    '404.html': 'template404',
-    '/404.html': 'template404',
-    '/': '/index.html',
-    '/index.html': '/index.html',
-    details: 'product__details',
-};
+function getRoute(href: string): string {
+    let result = 'template404';
+
+    if (href === '/' || href === 'index.html' || href === '/index.html') {
+        result = 'index';
+    }
+    if (href.includes('id=')) {
+        result = `product__details`;
+    }
+    return result;
+}
 
 function getHTML(route: string): Node {
     let result: Node = document.createTextNode('div');

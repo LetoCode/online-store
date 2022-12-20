@@ -1,7 +1,6 @@
 //import { productsArrayRaw } from './';
 import { Products } from './types';
 
-const productsItems: HTMLElement | null = document.querySelector('.products__items');
 // const productsArrayRaw = Object.values(products);
 //const productsArrayRaw = getAllProducts();
 // console.log(productsArrayRaw);
@@ -48,6 +47,7 @@ const productsItems: HTMLElement | null = document.querySelector('.products__ite
 // let product = new Product();
 
 export function showProducts(productsArray: Products[]) {
+    const productsItems: HTMLElement | null = document.querySelector('.products__items');
     if (productsItems) {
         productsItems.innerHTML = '';
         productsArray.forEach((product) => {
@@ -97,7 +97,7 @@ export function showProducts(productsArray: Products[]) {
             productButtons.append(btnDetails);
             btnDetails.classList.add('btn');
             btnDetails.classList.add('btn__details');
-            btnDetails.setAttribute('href', `${product.category}/${product.id}`);
+            btnDetails.setAttribute('href', `/#${product.category}/${product.brand}/id=${product.id}`);
             btnDetails.textContent = 'Details';
         });
     }

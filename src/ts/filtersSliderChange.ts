@@ -1,11 +1,18 @@
 import { updateProducts } from './filtering';
 
-document.getElementById('fromSlider-stock')?.addEventListener('change', inputRangeFilter);
-document.getElementById('toSlider-stock')?.addEventListener('change', inputRangeFilter);
-document.getElementById('fromSlider-price')?.addEventListener('change', inputRangeFilter);
-document.getElementById('toSlider-price')?.addEventListener('change', inputRangeFilter);
+document.addEventListener('change', (event) => {
+    if (
+        (event.target as HTMLElement).id === 'fromSlider-stock' ||
+        (event.target as HTMLElement).id === 'toSlider-stock' ||
+        (event.target as HTMLElement).id === 'romSlider-price' ||
+        (event.target as HTMLElement).id === 'toSlider-price'
+    ) {
+        inputRangeFilter(event);
+    }
+});
 
 function inputRangeFilter(event: Event) {
+    console.log('hrer');
     let minValue = '';
     let maxValue = '';
     let value = '';

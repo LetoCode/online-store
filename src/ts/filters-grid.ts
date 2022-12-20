@@ -27,7 +27,8 @@ export function showCategoryFilter(namesSet: string[], mapCurrentCount: Map<stri
         spanContainer.classList.add('element__counts');
 
         const countEl_span1: HTMLElement = document.createElement('span');
-        countEl_span1.setAttribute('id', `${element}_currCount`);
+        countEl_span1.setAttribute('id', `category_${element}_currCount`);
+        countEl_span1.classList.add('element__current-count');
         countEl_span1.innerText = mapCurrentCount.get(element)?.toString() || '';
         spanContainer.append(countEl_span1);
 
@@ -36,7 +37,7 @@ export function showCategoryFilter(namesSet: string[], mapCurrentCount: Map<stri
         spanContainer.append(countEl_span2);
 
         const countEl_span3: HTMLElement = document.createElement('span');
-        countEl_span3.setAttribute('id', `${element}_allCount`);
+        countEl_span3.setAttribute('id', `category_${element}_allCount`);
         countEl_span3.innerText = mapCurrentCount.get(element)?.toString() || '';
         spanContainer.append(countEl_span3);
 
@@ -78,7 +79,8 @@ export function showBrandsFilter(namesSet: string[], mapCurrentCount: Map<string
         spanContainer.classList.add('element__counts');
 
         const countEl_span1: HTMLElement = document.createElement('span');
-        countEl_span1.setAttribute('id', `${element}_currCount`);
+        countEl_span1.setAttribute('id', `brand_${element}_currCount`);
+        countEl_span1.classList.add('element__current-count');
         countEl_span1.innerText = mapCurrentCount.get(element)?.toString() || '';
         spanContainer.append(countEl_span1);
 
@@ -87,7 +89,7 @@ export function showBrandsFilter(namesSet: string[], mapCurrentCount: Map<string
         spanContainer.append(countEl_span2);
 
         const countEl_span3: HTMLElement = document.createElement('span');
-        countEl_span3.setAttribute('id', `${element}_allCount`);
+        countEl_span3.setAttribute('id', `brand_${element}_allCount`);
         countEl_span3.innerText = mapCurrentCount.get(element)?.toString() || '';
         spanContainer.append(countEl_span3);
 

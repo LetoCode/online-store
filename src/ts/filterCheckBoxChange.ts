@@ -1,4 +1,6 @@
 import { updateProducts } from './filtering';
+import { filteredProducts } from './filtering';
+import { Products } from './types';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';
@@ -12,6 +14,7 @@ document.addEventListener('click', (event: MouseEvent) => {
             const url = createQueryUrlForCheckbox(target, mode);
             window.history.pushState({}, '', url);
             updateProducts();
+            checkCountAllProductsAndUpdateCountOnPage();
         }
     }
 });
@@ -43,4 +46,18 @@ function createQueryUrlForCheckbox(target: HTMLElement, mode: string): string {
         }
     }
     return result;
+}
+
+export function checkCountAllProductsAndUpdateCountOnPage() {
+    const elementCounts: NodeListOf<Element> | null = document.querySelectorAll('.element__current-count');
+    if (elementCounts) {
+        for (const selector of elementCounts) {
+            const filterKey: string = selector.id.split('_')[0];
+            const filterValue: string = selector.id.split('_')[1];
+            const counterArr: Products[] | undefined = filteredProducts.filter(
+                (el) => el[filterKey as keyof Products] === filterValue
+            );
+            (selector as HTMLElement).innerText = counterArr.length.toString();
+        }
+    }
 }

@@ -1,22 +1,28 @@
 import '../scss/style.scss';
-import './products-grid';
 import './filterCheckBoxChange';
 import './filtersSliderChange';
 import '../assets/.htaccess';
-import { updateProducts, renderAllFilers, updateFiltersView } from './filtering';
+import { Products } from './types';
+import { updateProducts, renderAllFilters, updateFiltersView } from './filtering';
 import { handleLocation } from './routing';
+import { getAllProducts } from './getProducts';
+import { checkCountAllProductsAndUpdateCountOnPage } from './filterCheckBoxChange';
 
-window.addEventListener('load', windowLoad);
+export const productsArrayRaw: Products[] = getAllProducts();
+
 window.addEventListener('load', handleLocation);
+window.addEventListener('load', windowLoad);
+window.addEventListener('popstate', handleLocation);
 
-function windowLoad(): void {
-    renderAllFilers();
+export function windowLoad(): void {
+    renderAllFilters();
     updateFiltersView();
     updateProducts();
+    checkCountAllProductsAndUpdateCountOnPage();
     addListeners();
 }
 
-function addListeners() {
+function addListeners(): void {
     const btnResetFilters: HTMLElement | null = document.getElementById('btn-reset-filters');
     if (btnResetFilters) {
         btnResetFilters.addEventListener('click', () => {
