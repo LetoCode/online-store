@@ -23,13 +23,14 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
+    // cursor: pointer;
 
     &__title {
         text-align: center;
         background: $color-bg-title;
         border-bottom: 1px solid $color-primary;
         padding: 5px;
+        font-size: 16px;
     }
 
     &__info {
