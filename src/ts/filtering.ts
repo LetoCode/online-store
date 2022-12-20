@@ -1,12 +1,13 @@
-import { getAllProducts, getProductsWithParams, getCurrentFilterInfo } from './getProducts';
+import { getProductsWithParams, getCurrentFilterInfo } from './getProducts';
 import { Products } from './types';
 import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter } from './filters-grid';
 import { showProducts } from './products-grid';
+import { productsArrayRaw } from './index';
 
 //=============================listen history changes and use filers if they were==================
-export const productsArrayRaw: Products[] = getAllProducts();
+export let filteredProducts: Products[];
 
-export function renderAllFilers() {
+export function renderAllFilters() {
     //get all info about products and show all fiters and product list
 
     const [
@@ -24,11 +25,10 @@ export function renderAllFilers() {
     showBrandsFilter(brandsNamesSet as string[], brandsMapCurrentCount as Map<string, number>);
     showPriceFilter(minPrice as number, maxPrice as number, true);
     showStockFilter(minStock as number, maxStock as number, true);
-
-    showProducts(productsArrayRaw);
 }
 
 export function updateFiltersView(): void {
+    //if query parameters are, then we have to update our filters
     const search: string = window.location.search;
     const categories: NodeListOf<Element> = document.querySelectorAll(
         '#category-filter .filter-block__body__element input'
@@ -60,6 +60,7 @@ export function updateFiltersView(): void {
                 }
             }
         }
+
         //price
         if (paramsKeys.includes('price')) {
             const diapason: string | null = params.get('price');
@@ -85,14 +86,16 @@ export function updateFiltersView(): void {
         for (const el of brands) {
             (el as HTMLInputElement).checked = false;
         }
-        renderAllFilers();
+        renderAllFilters();
     }
 }
 
 export function updateProducts(): void {
+    //if query parameters are, then we have to update our products' list
     const search: string = window.location.search;
+    console.log('updateProducts', search);
     if (search) {
-        let filteredProducts: Products[] = productsArrayRaw;
+        filteredProducts = productsArrayRaw;
         const params: URLSearchParams = new URLSearchParams(search);
         const categoryParams: string[] = [];
         const brandParams: string[] = [];

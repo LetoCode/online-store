@@ -3,19 +3,44 @@
 
 <head>
    <meta charset="UTF-8">
+   <!-- <script>
+      //routing in first page load when use, for example http://localhost:8080/smartphones/Apple/id=2
+      href = window.location.pathname;
+      if (href) {
+
+         const route = getRoute(href);
+         console.log('window.event', event)
+         console.log('first route!!', route)
+         console.log('window.location!!', window.location)
+         window.history.pushState({}, '', route);
+         console.log('window.location2!!', window.location)
+         console.log('window.location2!!', window.navigator)
+      }
+      function getRoute(href) {
+         let result = 'template404';
+         if (href === '/' || href === 'index.html' || href === '/index.html') {
+            result = 'index.html';
+         }
+         if (href.includes('id=')) {
+            result = `product__details`;
+         }
+         return result;
+      }
+   </script> -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
    <title>Online-store</title>
+
 </head>
 
 <body>
    <div class="wrapper">
       <header class="header">
          <div class="header__title header-title">
-            <div class="header-title__logo"><a href="./index.html" class="header-title__link">🛍</a></div>
-            <h1 class="header-title__name"><a href="./index.html" class="header-title__link">Online Store</a></h1>
+            <div class="header-title__logo"><a href="/index.html" class="header-title__link">🛍</a></div>
+            <h1 class="header-title__name"><a href="/index.html" class="header-title__link">Online Store</a></h1>
          </div>
          <div class="header__sum header-sum">
             <div class="header-sum__text">Cart total: </div>
@@ -27,59 +52,7 @@
          </div>
       </header>
       <main class="main">
-         <div class="main__container">
-            <div class="filters">
-               <div class="filters__buttons filters-buttons">
-                  <button type="button" class="filters-buttons__btn" id="btn-reset-filters">Reset Filters</button>
-                  <button type="button" class="filters-buttons__btn" id="btn-copy-link">Copy Link</button>
-               </div>
-               <div class="filters__container filter-container">
-                  <div class="filter-container__block filter-container__block_category filter-block">
-                     <h3 class="filter-block__header">Category</h3>
-                     <div class="filter-block__body" id="category-filter"></div>
-                  </div>
-                  <div class="filter-container__block filter-container__block_brand filter-block">
-                     <h3 class="filter-block__header">Brand</h3>
-                     <div class="filter-block__body" id="brand-filter"></div>
-                  </div>
-                  <div class="filter-container__block filter-container__block_price filter-block">
-                     <h3 class="filter-block__header">Price</h3>
-                     <div class="filter-block__body range">
-                        <div class="range__container">
-                           <div class="range__container__labels range-labels">
-                              <div class="range-labels__min" id="min-price">1</div>
-                              <div class="range-labels__between">⟷</div>
-                              <div class="range-labels__max" id="max-price">100</div>
-                           </div>
-                           <div class="range__container__control route_filter_range">
-                              <input type="range" id="fromSlider-price" value="0" min="0" max="100" data-filter-key="price">
-                              <input type="range" id="toSlider-price" value="100" min="0" max="100" data-filter-key="price">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="filter-container__block filter-container__block_stock filter-block ">
-                     <h3 class="filter-block__header">Stock</h3>
-                     <div class="filter-block__body">
-                        <div class="range__container">
-                           <div class="range__container__labels range-labels">
-                              <div class="range-labels__min" id="min-stock">1</div>
-                              <div class="range-labels__between">⟷</div>
-                              <div class="range-labels__max" id="max-stock">100</div>
-                           </div>
-                           <div class="range__container__control route_filter_range">
-                              <input type="range" id="fromSlider-stock" value="0" min="0" max="100" data-filter-key="stock">
-                              <input type="range" id="toSlider-stock" value="100" min="0" max="100" data-filter-key="stock">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="products">
-               <div class="products__items"></div>
-            </div>
-         </div>
+
       </main>
       <footer class="footer">
          <div class="footer__github-container github-container">
@@ -100,6 +73,63 @@
    </div>
 
 
+   <template id="index">
+      <div class="main__container">
+         <div class="filters">
+            <div class="filters__buttons filters-buttons">
+               <button type="button" class="filters-buttons__btn" id="btn-reset-filters">Reset Filters</button>
+               <button type="button" class="filters-buttons__btn" id="btn-copy-link">Copy Link</button>
+            </div>
+            <div class="filters__container filter-container">
+               <div class="filter-container__block filter-container__block_category filter-block">
+                  <h3 class="filter-block__header">Category</h3>
+                  <div class="filter-block__body" id="category-filter"></div>
+               </div>
+               <div class="filter-container__block filter-container__block_brand filter-block">
+                  <h3 class="filter-block__header">Brand</h3>
+                  <div class="filter-block__body" id="brand-filter"></div>
+               </div>
+               <div class="filter-container__block filter-container__block_price filter-block">
+                  <h3 class="filter-block__header">Price</h3>
+                  <div class="filter-block__body range">
+                     <div class="range__container">
+                        <div class="range__container__labels range-labels">
+                           <div class="range-labels__min" id="min-price">1</div>
+                           <div class="range-labels__between">⟷</div>
+                           <div class="range-labels__max" id="max-price">100</div>
+                        </div>
+                        <div class="range__container__control route_filter_range">
+                           <input type="range" id="fromSlider-price" value="0" min="0" max="100" data-filter-key="price">
+                           <input type="range" id="toSlider-price" value="100" min="0" max="100" data-filter-key="price">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="filter-container__block filter-container__block_stock filter-block ">
+                  <h3 class="filter-block__header">Stock</h3>
+                  <div class="filter-block__body">
+                     <div class="range__container">
+                        <div class="range__container__labels range-labels">
+                           <div class="range-labels__min" id="min-stock">1</div>
+                           <div class="range-labels__between">⟷</div>
+                           <div class="range-labels__max" id="max-stock">100</div>
+                        </div>
+                        <div class="range__container__control route_filter_range">
+                           <input type="range" id="fromSlider-stock" value="0" min="0" max="100" data-filter-key="stock">
+                           <input type="range" id="toSlider-stock" value="100" min="0" max="100" data-filter-key="stock">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="products">
+            <div class="products__items"></div>
+         </div>
+      </div>
+   </template>
+
+
    <template id="template404">
       <div class="page404">
          <div class="page404__container">
@@ -114,11 +144,11 @@
          <div class="product__details">
             <div class="product__title"></div>
             <div class="product__data">
-              <div class="product__slides"></div>
-              <div class="product__photo">
-                 <img src="" alt="product" class="product__img">
-              </div>
-              <div class="product__options">
+               <div class="product__slides"></div>
+               <div class="product__photo">
+                  <img src="" alt="product" class="product__img">
+               </div>
+               <div class="product__options">
                   <div class="product__option">
                      <h3 class="product__option-title">Description:</h3>
                      <p class="product__option-text"></p>
@@ -143,15 +173,15 @@
                      <h3 class="product__option-title">Category:</h3>
                      <p class="product__option-text"></p>
                   </div>
-              </div>
-              <div class="product__price-block">
+               </div>
+               <div class="product__price-block">
                   <p class="product__price"></p>
                   <button class="btn btn__product-add">Add to cart</button>
                   <button class="btn btn__product-buy">Buy now</button>
-              </div>
+               </div>
             </div>
          </div>
-     </div>
+      </div>
    </template>
 </body>
 
