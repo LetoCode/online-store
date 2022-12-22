@@ -1,4 +1,4 @@
-import { Products } from './types';
+import { Products } from '../types/types';
 
 declare module '*.json' {
     const value: Products[];

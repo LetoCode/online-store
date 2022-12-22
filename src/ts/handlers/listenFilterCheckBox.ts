@@ -1,6 +1,6 @@
-import { updateProducts } from './filtering';
-import { filteredProducts } from './filtering';
-import { Products } from './types';
+import { updateProducts } from '../view/updateViewQueryParams';
+import { filteredProducts } from '../view/updateViewQueryParams';
+import { Products } from '../types/types';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';

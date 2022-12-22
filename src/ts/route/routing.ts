@@ -1,6 +1,6 @@
-import { fillProductDetails } from './productPage';
-import { renderAllFilters } from './filtering';
-import { windowLoad } from '.';
+import { fillProductDetails } from '../view/productPage';
+import { renderAllFilters } from '../view/showFiltersView';
+import { windowLoad } from '..';
 
 export function handleLocation(event: Event): void {
     renderAllFilters();
@@ -49,7 +49,8 @@ export function handleLocation(event: Event): void {
 function getRoute(href: string): string {
     let result = 'template404';
 
-    if (href === '/' || href === 'index.html' || href === '/index.html') {
+    // if (href === '/' || href === 'index.html' || href === '/index.html') {
+    if (href === '/') {
         result = 'index';
     }
     if (href.includes('id=')) {

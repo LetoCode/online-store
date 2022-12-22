@@ -1,24 +1,25 @@
 import '../scss/style.scss';
-import './filterCheckBoxChange';
-import './filtersSliderChange';
+import './handlers/listenFilterCheckBox';
+import './handlers/listenSlider';
 import '../assets/.htaccess';
-import { Products } from './types';
-import { updateProducts, renderAllFilters, updateFiltersView } from './filtering';
-import { handleLocation } from './routing';
-import { getAllProducts } from './getProducts';
-// import { checkCountAllProductsAndUpdateCountOnPage } from './filterCheckBoxChange';
+import { Products } from './types/types';
+import { updateProducts, updateFiltersView } from './view/updateViewQueryParams';
+//import { renderAllFilters } from './view/showFiltersView';
+import { handleLocation } from './route/routing';
+import { getAllProducts } from './handlers/getProductsData';
+import { checkCountAllProductsAndUpdateCountOnPage } from './handlers/listenFilterCheckBox';
 
 export const productsArrayRaw: Products[] = getAllProducts();
 
-window.addEventListener('load', handleLocation);
+window.addEventListener('DOMContentLoaded', handleLocation);
 window.addEventListener('load', windowLoad);
 window.addEventListener('popstate', handleLocation);
 
 export function windowLoad(): void {
-    renderAllFilters();
+    //renderAllFilters();
     updateFiltersView();
     updateProducts();
-    // checkCountAllProductsAndUpdateCountOnPage();
+    checkCountAllProductsAndUpdateCountOnPage();
     addListeners();
 }
 
@@ -30,6 +31,7 @@ function addListeners(): void {
             window.history.pushState({}, '', firstURL);
             updateProducts();
             updateFiltersView();
+            checkCountAllProductsAndUpdateCountOnPage();
         });
     }
 

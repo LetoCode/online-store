@@ -1,5 +1,5 @@
 //import { productsArrayRaw } from './';
-import { Products } from './types';
+import { Products } from '../types/types';
 
 // const productsArrayRaw = Object.values(products);
 //const productsArrayRaw = getAllProducts();

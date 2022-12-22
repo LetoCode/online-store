@@ -1,6 +1,6 @@
-import products from './products.json';
-import { Products } from './types';
-import { productsArrayRaw } from './index';
+import products from '../data/products.json';
+import { Products } from '../types/types';
+import { productsArrayRaw } from '../index';
 
 export function getAllProducts(): Products[] {
     return Object.values(products)[0];

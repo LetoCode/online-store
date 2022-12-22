@@ -1,10 +1,10 @@
-import { updateProducts } from './filtering';
+import { updateProducts } from '../view/updateViewQueryParams';
 
 document.addEventListener('change', (event) => {
     if (
         (event.target as HTMLElement).id === 'fromSlider-stock' ||
         (event.target as HTMLElement).id === 'toSlider-stock' ||
-        (event.target as HTMLElement).id === 'romSlider-price' ||
+        (event.target as HTMLElement).id === 'fromSlider-price' ||
         (event.target as HTMLElement).id === 'toSlider-price'
     ) {
         inputRangeFilter(event);
@@ -12,7 +12,6 @@ document.addEventListener('change', (event) => {
 });
 
 function inputRangeFilter(event: Event) {
-    console.log('hrer');
     let minValue = '';
     let maxValue = '';
     let value = '';
