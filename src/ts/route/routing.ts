@@ -49,7 +49,8 @@ export function handleLocation(event: Event): void {
 function getRoute(href: string): string {
     let result = 'template404';
 
-    if (href === '/' || href === 'index.html' || href === '/index.html') {
+    // if (href === '/' || href === 'index.html' || href === '/index.html') {
+    if (href === '/') {
         result = 'index';
     }
     if (href.includes('id=')) {
