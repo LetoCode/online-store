@@ -1,9 +1,9 @@
 import { fillProductDetails } from '../view/productPage';
-import { renderAllFilters } from '../view/showFiltersView';
+//import { renderAllFilters } from '../view/showFiltersView';
 import { windowLoad } from '..';
 
 export function handleLocation(event: Event): void {
-    renderAllFilters();
+    //renderAllFilters();
 
     const search: string = window.location.search;
     if (search) {

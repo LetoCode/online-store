@@ -1,4 +1,6 @@
 import { updateProducts } from '../view/updateViewQueryParams';
+import { filteredProducts } from '../view/updateViewQueryParams';
+import { checkCountAllProductsAndUpdateCountOnPage } from './listenFilterCheckBox';
 
 document.addEventListener('change', (event) => {
     if (
@@ -45,6 +47,14 @@ function inputRangeFilter(event: Event) {
     const url = createQueryUrlForRange(key, value);
     window.history.pushState({}, '', url);
     updateProducts();
+
+    if ((event.target as HTMLInputElement).dataset.filterKey === 'price') {
+        checkAllProductsAndUpdateSliderStock();
+    }
+    if ((event.target as HTMLInputElement).dataset.filterKey === 'stock') {
+        checkAllProductsAndUpdateSliderPrice();
+    }
+    checkCountAllProductsAndUpdateCountOnPage();
 }
 
 function createQueryUrlForRange(key: string, value: string): string {
@@ -68,4 +78,34 @@ function createQueryUrlForRange(key: string, value: string): string {
     }
 
     return result;
+}
+
+export function checkAllProductsAndUpdateSliderPrice() {
+    const priceArr: number[] = filteredProducts.map((el) => el.price);
+    const fromSliderPrice: HTMLInputElement | null = document.getElementById('fromSlider-price') as HTMLInputElement;
+    const toSliderPrice: HTMLInputElement | null = document.getElementById('toSlider-price') as HTMLInputElement;
+    const minPriceEl: HTMLElement | null = document.querySelector('#min-price');
+    const maxPriceEl: HTMLElement | null = document.querySelector('#max-price');
+    if (fromSliderPrice && minPriceEl) {
+        fromSliderPrice.value = Math.min(...priceArr).toString();
+        minPriceEl.innerText = `€${Math.min(...priceArr).toString()}`;
+    }
+    if (toSliderPrice && maxPriceEl) {
+        toSliderPrice.value = Math.max(...priceArr).toString();
+        maxPriceEl.innerText = `€${Math.max(...priceArr).toString()}`;
+    }
+}
+
+export function checkAllProductsAndUpdateSliderStock() {
+    const stockArr: number[] = filteredProducts.map((el) => el.stock);
+    const fromSliderStock: HTMLInputElement | null = document.getElementById('fromSlider-stock') as HTMLInputElement;
+    const toSliderStock: HTMLInputElement | null = document.getElementById('toSlider-stock') as HTMLInputElement;
+    const minStockEl: HTMLElement | null = document.querySelector('#min-stock');
+    const maxStockEl: HTMLElement | null = document.querySelector('#max-stock');
+    if (fromSliderStock && minStockEl) {
+        minStockEl.innerText = fromSliderStock.value = Math.min(...stockArr).toString();
+    }
+    if (toSliderStock && maxStockEl) {
+        maxStockEl.innerText = toSliderStock.value = Math.max(...stockArr).toString();
+    }
 }

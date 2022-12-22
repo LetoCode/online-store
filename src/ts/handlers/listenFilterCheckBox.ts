@@ -1,6 +1,7 @@
 import { updateProducts } from '../view/updateViewQueryParams';
 import { filteredProducts } from '../view/updateViewQueryParams';
 import { Products } from '../types/types';
+import { checkAllProductsAndUpdateSliderPrice, checkAllProductsAndUpdateSliderStock } from './listenSlider';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';
@@ -15,6 +16,8 @@ document.addEventListener('click', (event: MouseEvent) => {
             window.history.pushState({}, '', url);
             updateProducts();
             checkCountAllProductsAndUpdateCountOnPage();
+            checkAllProductsAndUpdateSliderPrice();
+            checkAllProductsAndUpdateSliderStock();
         }
     }
 });
