@@ -131,8 +131,8 @@ export function showPriceFilter(minPrice: number, maxPrice: number, changeAttrib
     const minPriceEl: HTMLElement | null = document.querySelector('#min-price');
     const maxPriceEl: HTMLElement | null = document.querySelector('#max-price');
     if (fromSliderPrice && toSliderPrice && minPriceEl && maxPriceEl) {
-        minPriceEl.textContent = minPrice.toString();
-        maxPriceEl.textContent = maxPrice.toString();
+        minPriceEl.textContent = `€${minPrice.toString()}`;
+        maxPriceEl.textContent = `€${maxPrice.toString()}`;
         if (changeAttributes) {
             fromSliderPrice.setAttribute('min', minPrice.toString());
             fromSliderPrice.setAttribute('max', maxPrice.toString());
@@ -186,7 +186,7 @@ function controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElem
     if (from > to) {
         fromSlider.value = to.toString();
     }
-    minEl.textContent = fromSlider.value;
+    minEl.textContent = `€${fromSlider.value}`;
 }
 
 function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, maxEl: HTMLElement) {
@@ -196,7 +196,7 @@ function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElemen
     } else {
         toSlider.value = from.toString();
     }
-    maxEl.textContent = toSlider.value;
+    maxEl.textContent = `€${toSlider.value}`;
 }
 
 function getParsed(currentFrom: HTMLInputElement, currentTo: HTMLInputElement): number[] {
