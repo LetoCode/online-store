@@ -1,31 +1,12 @@
-import { getProductsWithParams, getCurrentFilterInfo } from './getProducts';
-import { Products } from './types';
-import { showBrandsFilter, showCategoryFilter, showPriceFilter, showStockFilter } from './filters-grid';
-import { showProducts } from './products-grid';
-import { productsArrayRaw } from './index';
+import { getProductsWithParams } from '../handlers/getProductsData';
+import { Products } from '../types/types';
+import { showPriceFilter, showStockFilter } from './showFiltersView';
+import { showProducts } from './productsGrid';
+import { productsArrayRaw } from '../index';
+import { renderAllFilters } from './showFiltersView';
 
 //=============================listen history changes and use filers if they were==================
 export let filteredProducts: Products[];
-
-export function renderAllFilters() {
-    //get all info about products and show all fiters and product list
-
-    const [
-        categoriesNamesSet,
-        brandsNamesSet,
-        minPrice,
-        maxPrice,
-        minStock,
-        maxStock,
-        categoriesMapCurrentCount,
-        brandsMapCurrentCount,
-    ] = getCurrentFilterInfo(productsArrayRaw);
-
-    showCategoryFilter(categoriesNamesSet as string[], categoriesMapCurrentCount as Map<string, number>);
-    showBrandsFilter(brandsNamesSet as string[], brandsMapCurrentCount as Map<string, number>);
-    showPriceFilter(minPrice as number, maxPrice as number, true);
-    showStockFilter(minStock as number, maxStock as number, true);
-}
 
 export function updateFiltersView(): void {
     //if query parameters are, then we have to update our filters
@@ -93,7 +74,6 @@ export function updateFiltersView(): void {
 export function updateProducts(): void {
     //if query parameters are, then we have to update our products' list
     const search: string = window.location.search;
-    console.log('updateProducts', search);
     if (search) {
         filteredProducts = productsArrayRaw;
         const params: URLSearchParams = new URLSearchParams(search);
@@ -133,6 +113,7 @@ export function updateProducts(): void {
         }
         showProducts(filteredProducts);
     } else {
+        filteredProducts = productsArrayRaw;
         showProducts(productsArrayRaw);
     }
 }

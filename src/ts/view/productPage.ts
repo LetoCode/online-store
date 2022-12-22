@@ -1,5 +1,5 @@
-import { productsArrayRaw } from './index';
-import { Products } from './types';
+import { productsArrayRaw } from '../index';
+import { Products } from '../types/types';
 
 export function fillProductDetails(href: string): void {
     const productHref = href.split('/');

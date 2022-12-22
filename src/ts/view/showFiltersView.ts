@@ -1,3 +1,26 @@
+import { getCurrentFilterInfo } from '../handlers/getProductsData';
+import { productsArrayRaw } from '../index';
+
+export function renderAllFilters() {
+    //get all info about products and show all filters and product list
+
+    const [
+        categoriesNamesSet,
+        brandsNamesSet,
+        minPrice,
+        maxPrice,
+        minStock,
+        maxStock,
+        categoriesMapCurrentCount,
+        brandsMapCurrentCount,
+    ] = getCurrentFilterInfo(productsArrayRaw);
+
+    showCategoryFilter(categoriesNamesSet as string[], categoriesMapCurrentCount as Map<string, number>);
+    showBrandsFilter(brandsNamesSet as string[], brandsMapCurrentCount as Map<string, number>);
+    showPriceFilter(minPrice as number, maxPrice as number, true);
+    showStockFilter(minStock as number, maxStock as number, true);
+}
+
 export function showCategoryFilter(namesSet: string[], mapCurrentCount: Map<string, number>): void {
     const categoryFilter: HTMLElement | null = document.getElementById('category-filter');
     const fragment: DocumentFragment = document.createDocumentFragment();
