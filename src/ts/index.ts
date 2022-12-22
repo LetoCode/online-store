@@ -6,7 +6,7 @@ import { Products } from './types';
 import { updateProducts, renderAllFilters, updateFiltersView } from './filtering';
 import { handleLocation } from './routing';
 import { getAllProducts } from './getProducts';
-import { checkCountAllProductsAndUpdateCountOnPage } from './filterCheckBoxChange';
+// import { checkCountAllProductsAndUpdateCountOnPage } from './filterCheckBoxChange';
 
 export const productsArrayRaw: Products[] = getAllProducts();
 
@@ -18,7 +18,7 @@ export function windowLoad(): void {
     renderAllFilters();
     updateFiltersView();
     updateProducts();
-    checkCountAllProductsAndUpdateCountOnPage();
+    // checkCountAllProductsAndUpdateCountOnPage();
     addListeners();
 }
 

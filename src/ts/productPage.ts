@@ -11,6 +11,8 @@ export function fillProductDetails(href: string): void {
         const currProduct: Products | undefined = productsArrayRaw.find((el) => el.id === productIdNumber);
 
         if (currProduct) {
+            fillBreadcrumb(currProduct);
+
             const productTitle = document.querySelector('.product__title');
             const productSlides = document.querySelector('.product__slides');
             const productImg: HTMLImageElement | null = document.querySelector('.product__img');
@@ -47,5 +49,31 @@ export function fillProductDetails(href: string): void {
 
             if (productPrice) productPrice.textContent = `€${currProduct.price}.00`;
         }
+    }
+}
+
+function fillBreadcrumb(product: Products): void {
+    const breadcrumb = document.querySelector('.breadcrumb');
+    const category = document.createElement('a');
+    const brand = document.createElement('a');
+    const title = document.createElement('a');
+
+    if (breadcrumb) {
+        breadcrumb.innerHTML += `>>`;
+        breadcrumb.append(category);
+        category.classList.add('breadcrumb__item');
+        category.textContent = product.category;
+        category.href = `/?${product.category}=category`;
+
+        breadcrumb.innerHTML += `>>`;
+        breadcrumb.append(brand);
+        brand.classList.add('breadcrumb__item');
+        brand.textContent = product.brand;
+        brand.href = `/?${product.brand}=brand`;
+
+        breadcrumb.innerHTML += `>>`;
+        breadcrumb.append(title);
+        title.classList.add('breadcrumb__item');
+        title.textContent = product.title;
     }
 }
