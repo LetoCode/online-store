@@ -1,4 +1,21 @@
+.breadcrumb {
+    margin: 3% auto;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+
+    &__item {
+        text-transform: uppercase;
+        color: $color-additional;
+        font-size: 16px;
+    }
+}
+
 .product {
+    &__container {
+        padding: 2%;
+    }
+
     &__details {
         border: 2px solid $color-primary;
         border-radius: 1rem;
