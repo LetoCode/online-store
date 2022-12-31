@@ -26,3 +26,9 @@ export interface SearchParameters {
 }
 
 export type FilterInfo = number | string[] | Map<string, number>;
+
+export type promoCodesInfo = {
+    name: string;
+    description: string;
+    value: number;
+};

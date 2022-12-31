@@ -4,4 +4,11 @@
         padding: 2%;
         justify-content: space-between;
     }
+
+    &__loading {
+        display: none;
+        &._active {
+            display: block;
+        }
+    }
 }
