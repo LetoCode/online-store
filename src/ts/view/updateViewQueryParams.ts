@@ -74,8 +74,8 @@ export function updateFiltersView(): void {
 export function updateProducts(): void {
     //if query parameters are, then we have to update our products' list
     const search: string = window.location.search;
+    filteredProducts = productsArrayRaw;
     if (search) {
-        filteredProducts = productsArrayRaw;
         const params: URLSearchParams = new URLSearchParams(search);
         const categoryParams: string[] = [];
         const brandParams: string[] = [];
@@ -113,7 +113,6 @@ export function updateProducts(): void {
         }
         showProducts(filteredProducts);
     } else {
-        filteredProducts = productsArrayRaw;
         showProducts(productsArrayRaw);
     }
 }

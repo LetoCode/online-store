@@ -56,6 +56,11 @@ export function showProducts(productsArray: Products[]) {
             const productInfo = document.createElement('div');
             const productButtons = document.createElement('div');
             const btnAdd = document.createElement('button');
+            const btnAdded = document.createElement('button');
+            const btnAddedContainer = document.createElement('div');
+            const btnAddedMinus = document.createElement('button');
+            const btnAddedCount = document.createElement('span');
+            const btnAddedPlus = document.createElement('button');
             const btnDetails = document.createElement('a');
 
             if (productsItems) productsItems.append(productItem);
@@ -89,16 +94,36 @@ export function showProducts(productsArray: Products[]) {
             productItem.append(productButtons);
             productButtons.classList.add('product__buttons');
 
-            productButtons.append(btnAdd);
             btnAdd.classList.add('btn');
             btnAdd.classList.add('btn__add');
+            btnAdd.classList.add('_active');
+            btnAdd.setAttribute('data-product-id', `${product.id}`);
             btnAdd.textContent = 'Add to cart';
+            productButtons.append(btnAdd);
 
-            productButtons.append(btnDetails);
+            btnAdded.classList.add('btn');
+            btnAdded.classList.add('btn__added');
+            btnAdded.setAttribute('data-product-id', `${product.id}`);
+            btnAddedContainer.classList.add('btn__added__container');
+            btnAddedMinus.classList.add('btn__added__minus');
+            btnAddedCount.classList.add('btn__added__count');
+            btnAddedPlus.classList.add('btn__added__plus');
+            btnAddedMinus.textContent = '-';
+            btnAddedPlus.textContent = '+';
+            btnAddedContainer.setAttribute('data-product-id', `${product.id}`);
+            btnAddedPlus.setAttribute('data-product-id', `${product.id}`);
+            btnAddedMinus.setAttribute('data-product-id', `${product.id}`);
+            btnAddedCount.setAttribute('data-product-id', `${product.id}`);
+            btnAddedContainer.appendChild(btnAddedMinus);
+            btnAddedContainer.appendChild(btnAddedCount);
+            btnAddedContainer.appendChild(btnAddedPlus);
+            productButtons.append(btnAddedContainer);
+
             btnDetails.classList.add('btn');
             btnDetails.classList.add('btn__details');
             btnDetails.setAttribute('href', `/#${product.category}/${product.brand}/id=${product.id}`);
             btnDetails.textContent = 'Details';
+            productButtons.append(btnDetails);
         });
     }
 }

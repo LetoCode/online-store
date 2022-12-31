@@ -13,6 +13,7 @@ const baseConfig = {
         //publicPath: 'dist',
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
+        //assetModuleFilename: 'src/assets/images/[name].[ext]',
     },
     optimization: {
         minimize: false
@@ -20,7 +21,7 @@ const baseConfig = {
     module: {
         rules: [
             {
-                test: /\.(png|ico|gif|jpg|jpeg|svg|mp3|wav)$/i,
+                test: /\.(png|ico|gif|jpg|jpeg|svg|mp3|wav|webp)$/i,
                 type: 'asset/resource',
             },
             {
