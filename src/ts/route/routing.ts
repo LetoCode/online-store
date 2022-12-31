@@ -1,10 +1,8 @@
 import { fillProductDetails } from '../view/productPage';
-//import { renderAllFilters } from '../view/showFiltersView';
+import { showCartPage } from '../view/showCartDataOnCartPage';
 import { windowLoad } from '..';
 
 export function handleLocation(event: Event): void {
-    //renderAllFilters();
-
     const search: string = window.location.search;
     if (search) {
         const html: Node = getHTML('index');
@@ -18,16 +16,13 @@ export function handleLocation(event: Event): void {
         let href;
         if (event.target instanceof HTMLAnchorElement) {
             href = event.target.href;
-            //console.log('href1:>', href);
         } else {
             href = window.location.pathname;
-            //console.log('href2:>', window.location);
         }
 
         window.history.pushState({}, '', href);
         event.preventDefault();
         event.stopImmediatePropagation();
-
         if (href) {
             const route = getRoute(href);
             const html: Node = getHTML(route);
@@ -40,6 +35,9 @@ export function handleLocation(event: Event): void {
                 }
                 if (route === 'index') {
                     windowLoad();
+                }
+                if (route === 'cart_page') {
+                    showCartPage();
                 }
             }
         }
@@ -55,6 +53,9 @@ function getRoute(href: string): string {
     }
     if (href.includes('id=')) {
         result = `product__details`;
+    }
+    if (href.includes('cart')) {
+        result = 'cart_page';
     }
     return result;
 }

@@ -44,15 +44,14 @@
          </div>
          <div class="header__sum header-sum">
             <div class="header-sum__text">Cart total: </div>
-            <div class="header-sum__amount"></div>
+            <div class="header-sum__amount">€0.00</div>
 
          </div>
          <div class="header__cart header-cart">
-            <div class="header-cart__logo"><a href="#" class="header-cart__link"><span class="header-cart__goods-amount">0</span></a></div>
+            <div class="header-cart__logo"><a href="/cart" class="header-cart__link"><span class="header-cart__goods-amount">0</span></a></div>
          </div>
       </header>
       <main class="main">
-
       </main>
       <footer class="footer">
          <div class="footer__github-container github-container">
@@ -70,6 +69,50 @@
             <a class="rsschool-container__link" href="https://rs.school/js/"><img src="rs_school_js.svg" alt="RSSchool"></a>
          </div>
       </footer>
+
+      <div id="popup" class="popup">
+         <div class="popup__content _active">
+            <div class="popup__body">
+               <form class="popup__form person-form">
+                  <div class="person-form__details person">
+                     <h2>Personal details </h2>
+                     <div class="person__name form__item"><input class="person__item_input" id="name" type="text" placeholder="Name" title="field format: FirstName LastName"></div>
+                     <div class="person__phone form__item"><input class="person__item_input" id="phone" type="tel" placeholder="Phone number"></div>
+                     <div class="person__address form__item"><input class="person__item_input" id="address" type="text" placeholder="Delivery address"></div>
+                     <div class="person__email form__item"><input class="person__item_input" id="email" type="email" placeholder="E-mail"></div>
+                  </div>
+                  <div class="person-form__card card">
+                     <h2>Credit card details</h2>
+                     <div class="card__data data">
+                        <div class="data__number">
+                           <img alt="" id="paying-system-logo" src="./assets/noPaySystemLogo.webp">
+                           <input class="data__number_input" type="text" placeholder="Card number" id="card-number">
+                        </div>
+                        <div class="data__other">
+                           <div class="data__other__valid-data">
+                              VALID:
+                              <input class="data__other_input" type="text" placeholder="Valid Thru" id="card-date">
+                           </div>
+                           <div class="data__other__cvv-data">
+                              CVV:
+                              <input class="data__other_input" type="text" placeholder="Code" id="card-cvv">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <button class="btn person-form__btn" type="button" id="submit-purchases">CONFIRM</button>
+                  <div class="person-form__error">
+                     Error: wrong fields!
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div class="popup__order-is-processed">
+            <h1 class="popup__order-is-processed__title">Congratulations!! Order is processed</h1>
+         </div>
+      </div>
+
+
    </div>
 
 
@@ -208,6 +251,115 @@
          </div>
       </div>
    </template>
+
+
+   <template id="cart_page">
+      <div class="cart-empty__container">
+         <h1 class="cart-empty">Cart is Empty</h1>
+      </div>
+      <div class="cart">
+         <div class="cart__products products-cart">
+            <div class="products-cart__header products-header">
+               <div class="products-header__title">
+                  <h2>Products in cart</h2>
+               </div>
+               <div class="products-header__elements">
+                  <div class="products-header__items">
+                     <label class="products-header__items__title">items on page: </label>
+                     <input class="products-header__items__count" id="cart-items-on-page" type="number"></input>
+                  </div>
+                  <div class="products-header__page">
+                     <div class="products-header__page__title">Page:</div>
+                     <button class="products-header__page__left-arrow"> &lt; </button>
+                     <input class="products-header__page__page-number" id="cart-page-number" type="number"></input>
+                     <button class="products-header__page__right-arrow"> &gt; </button>
+                  </div>
+               </div>
+            </div>
+            <div class="products-cart__items" id="products-cart-items">
+            </div>
+         </div>
+         <div class="cart__summary cart-summary">
+            <div class="cart-summary__header">
+               summary
+            </div>
+            <div class="cart-summary__info summary-info">
+               <div class="summary-info__number-of-products">
+                  <p class="summary-info__number-of-products__title">Products:</p>
+                  <div class="summary-info__number-of-products__value"></div>
+               </div>
+               <div class="summary-info__summa summary-info__summa_no-promo">
+                  <p class="summary-info__summa__title summary-info__summa__title_no-promo">Total:</p>
+                  <div class="summary-info__summa__value summary-info__summa__value_no-promo"></div>
+               </div>
+               <div class="summary-info__summa">
+                  <p class="summary-info__summa__title summary-info__summa__title_promo">Total:</p>
+                  <div class="summary-info__summa__value summary-info__summa__value_promo"></div>
+               </div>
+               <div class="summary-info__promo">
+                  <div class="summary-info__promo__applied-codes applied-promo">
+                     <h3 class="applied-promo__title">Applied codes</h3>
+                     <div class="applied-promo__body promo-body">
+                     </div>
+                  </div>
+                  <div class="summary-info__promo__input-body">
+                     <input type="text" class="summary-info__promo__input" id="promo__input" placeholder="Enter promo code"></input>
+                  </div>
+                  <div class="summary-info__promo__checked-promo checked-promo">
+                     <div class="checked-promo__title"></div>
+                     <button class="btn checked-promo__btn" type="button">add</button>
+                  </div>
+                  <div class="summary-info__promo__tips">
+                     Promo for test: 'RS', 'EPM'
+                  </div>
+               </div>
+            </div>
+            <div class="cart-summary__buy summary-buy">
+               <button class="btn summary-buy__btn" type="button">Buy now</button>
+            </div>
+         </div>
+      </div>
+   </template>
+
+   <template id="cart-item-template">
+      <div class="products-cart__item cart-item">
+         <div class="cart-item__body">
+            <div class="cart-item__number item-number">
+               <div class="item-number__element"></div>
+            </div>
+            <div class="cart-item__info item-info">
+               <div class="item-info__image item-image">
+                  <a href="" class="item-image__link"></a>
+               </div>
+               <div class="item-info__body">
+                  <div class="item-info__header"></div>
+                  <div class="item-info__description"></div>
+                  <div class="item-info__details-container info-details-container">
+                     <div class="info-details-container__rating"></div>
+                     <div class="info-details-container__discount"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="cart-item__control item-control">
+               <div class="item-control__stock"></div>
+               <div class="item-control__count-choose count-choose">
+                  <button class="count-choose__plus" type="button">+</button>
+                  <div class="count-choose__count"></div>
+                  <button class="count-choose__minus" type="button">-</button>
+               </div>
+               <div class="item-control__price"></div>
+            </div>
+         </div>
+      </div>
+   </template>
+
+   <template id="applied-promo-template">
+      <div class="promo-body__item">
+         <div class="promo-body__name"></div>
+         <button class="btn promo-body__drop-btn" type="button">drop</button>
+      </div>
+   </template>
+
 </body>
 
 </html>

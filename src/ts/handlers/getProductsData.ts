@@ -81,3 +81,8 @@ export function getCurrentFilterInfo(productsArray: Products[]) {
         brandsMapCurrentCount,
     ];
 }
+
+export function getStockOfProduct(id: number): number {
+    const el: Products | undefined = productsArrayRaw.find((el) => el.id === id);
+    return el ? el.stock : 0;
+}
