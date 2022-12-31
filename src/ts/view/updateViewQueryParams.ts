@@ -4,6 +4,7 @@ import { showPriceFilter, showStockFilter } from './showFiltersView';
 import { showProducts } from './productsGrid';
 import { productsArrayRaw } from '../index';
 import { renderAllFilters } from './showFiltersView';
+import { sorting } from '../handlers/listenSorting';
 
 //=============================listen history changes and use filers if they were==================
 export let filteredProducts: Products[];
@@ -111,9 +112,9 @@ export function updateProducts(): void {
         if (stockParams.length > 0) {
             filteredProducts = getProductsWithParams('stock', stockParams, filteredProducts);
         }
-        showProducts(filteredProducts);
+        showProducts(filteredProducts, sorting);
     } else {
         filteredProducts = productsArrayRaw;
-        showProducts(productsArrayRaw);
+        showProducts(productsArrayRaw, sorting);
     }
 }

@@ -1,52 +1,18 @@
-//import { productsArrayRaw } from './';
 import { Products } from '../types/types';
 
-// const productsArrayRaw = Object.values(products);
-//const productsArrayRaw = getAllProducts();
-// console.log(productsArrayRaw);
-// class Product implements Products {
-//     id: number;
-//     title: string;
-//     description: string;
-//     price: number;
-//     discountPercentage: number;
-//     rating: number;
-//     stock: number;
-//     brand: string;
-//     category: string;
-//     thumbnail: string;
-//     images: string[];
+export function showProducts(productsArray: Products[], sorting: string) {
+    switch (sorting) {
+        case 'rating':
+            productsArray.sort((a, b) => b.rating - a.rating);
+            break;
+        case 'price-low':
+            productsArray.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-high':
+            productsArray.sort((a, b) => b.price - a.price);
+            break;
+    }
 
-//     constructor(
-//         id: number,
-//         title: string,
-//         description: string,
-//         price: number,
-//         discountPercentage: number,
-//         rating: number,
-//         stock: number,
-//         brand: string,
-//         category: string,
-//         thumbnail: string,
-//         images: string[]
-//     ) {
-//         this.id = id;
-//         this.title = title;
-//         this.description = description;
-//         this.price = price;
-//         this.discountPercentage = discountPercentage;
-//         this.rating = rating;
-//         this.stock = stock;
-//         this.brand = brand;
-//         this.category = category;
-//         this.thumbnail = thumbnail;
-//         this.images = images;
-//     }
-// }
-
-// let product = new Product();
-
-export function showProducts(productsArray: Products[]) {
     const productsItems: HTMLElement | null = document.querySelector('.products__items');
     if (productsItems) {
         productsItems.innerHTML = '';
