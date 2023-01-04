@@ -25,6 +25,7 @@ function createQueryUrlForSorting(target: HTMLSelectElement): string {
         params = new URLSearchParams(search);
     } else {
         params = new URLSearchParams();
+        params.append('index', 'page');
     }
     if (key && value) {
         params.set(value, key);

@@ -41,6 +41,7 @@ function addListeners(): void {
             const firstURL: string = window.location.href.split('?')[0];
             window.history.pushState({}, '', firstURL);
             updateProducts();
+            restoreCart();
             updateFiltersView();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
@@ -64,9 +65,9 @@ function addListeners(): void {
         btnCopyLink.addEventListener('click', () => {
             const url: string = window.location.href;
             navigator.clipboard.writeText(url);
-            btnCopyLink.setAttribute('title', 'Link has copied!!!');
+            btnCopyLink.innerText = 'Got It!';
             setTimeout(() => {
-                btnCopyLink.removeAttribute('title');
+                btnCopyLink.innerText = 'Copy Link';
             }, 2000);
         });
     }
@@ -84,12 +85,15 @@ export function addBtnListeners(): void {
     if (productButtons) {
         productButtons.forEach((element) => {
             element.addEventListener('click', (event) => {
+                console.log('add')
                 if (
                     (event.target as HTMLElement).closest('.btn__add') ||
                     (event.target as HTMLElement).closest('.btn__added__plus')
                 ) {
+
                     const id: string | undefined = (event.target as HTMLElement).dataset.productId;
                     if (id) {
+
                         addToStorage(id, 1);
                         const cartInfo = new Map();
                         cartInfo.set(id, 1);

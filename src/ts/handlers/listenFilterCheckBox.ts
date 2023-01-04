@@ -2,6 +2,8 @@ import { updateProducts } from '../view/updateViewQueryParams';
 import { filteredProducts } from '../view/updateViewQueryParams';
 import { Products } from '../types/types';
 import { checkAllProductsAndUpdateSliderPrice, checkAllProductsAndUpdateSliderStock } from './listenSlider';
+import { addBtnListeners } from '..';
+import { restoreCart } from '../view/showCartDataOnMainPage';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';
@@ -15,6 +17,8 @@ document.addEventListener('click', (event: MouseEvent) => {
             const url = createQueryUrlForCheckbox(target, mode);
             window.history.pushState({}, '', url);
             updateProducts();
+            restoreCart();
+            addBtnListeners();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
             checkAllProductsAndUpdateSliderStock();

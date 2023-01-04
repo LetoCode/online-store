@@ -14,9 +14,9 @@ const baseConfig = {
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: '[name][ext]',
     },
-    optimization: {
-        minimize: false
-    },
+    // optimization: {
+    //     minimize: false
+    // },
     module: {
         rules: [
             {
