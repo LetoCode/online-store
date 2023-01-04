@@ -1,6 +1,5 @@
 import { addBtnListeners, productsArrayRaw } from '../index';
 import { Products } from '../types/types';
-import { popupOpen } from './popup';
 import { setBtnAdd } from './productsGrid';
 import { restoreCart } from './showCartDataOnMainPage';
 

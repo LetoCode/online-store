@@ -85,15 +85,13 @@ export function addBtnListeners(): void {
     if (productButtons) {
         productButtons.forEach((element) => {
             element.addEventListener('click', (event) => {
-                console.log('add')
+                console.log('add');
                 if (
                     (event.target as HTMLElement).closest('.btn__add') ||
                     (event.target as HTMLElement).closest('.btn__added__plus')
                 ) {
-
                     const id: string | undefined = (event.target as HTMLElement).dataset.productId;
                     if (id) {
-
                         addToStorage(id, 1);
                         const cartInfo = new Map();
                         cartInfo.set(id, 1);
