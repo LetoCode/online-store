@@ -3,30 +3,6 @@
 
 <head>
    <meta charset="UTF-8">
-   <!-- <script>
-      //routing in first page load when use, for example http://localhost:8080/smartphones/Apple/id=2
-      href = window.location.pathname;
-      if (href) {
-
-         const route = getRoute(href);
-         console.log('window.event', event)
-         console.log('first route!!', route)
-         console.log('window.location!!', window.location)
-         window.history.pushState({}, '', route);
-         console.log('window.location2!!', window.location)
-         console.log('window.location2!!', window.navigator)
-      }
-      function getRoute(href) {
-         let result = 'template404';
-         if (href === '/' || href === 'index.html' || href === '/index.html') {
-            result = 'index.html';
-         }
-         if (href.includes('id=')) {
-            result = `product__details`;
-         }
-         return result;
-      }
-   </script> -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +24,7 @@
 
          </div>
          <div class="header__cart header-cart">
-            <div class="header-cart__logo"><a href="/cart" class="header-cart__link"><span class="header-cart__goods-amount">0</span></a></div>
+            <div class="header-cart__logo"><a href="/?cart" class="header-cart__link" id="cart-link"><span class="header-cart__goods-amount">0</span></a></div>
          </div>
       </header>
       <main class="main">
@@ -85,7 +61,7 @@
                      <h2>Credit card details</h2>
                      <div class="card__data data">
                         <div class="data__number">
-                           <img alt="" id="paying-system-logo" src="./assets/noPaySystemLogo.webp">
+                           <img alt="" id="paying-system-logo" src="noPaySystemLogo.webp">
                            <input class="data__number_input" type="text" placeholder="Card number" id="card-number">
                         </div>
                         <div class="data__other">
@@ -182,11 +158,33 @@
                </div>
                <div class="sort__view">
                   <div class="sort__view-small view-mode">
-                     <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                     <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
                   </div>
                   <div class="sort__view-big view-mode">
-                     <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
                   </div>
                </div>
             </div>

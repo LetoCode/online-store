@@ -13,7 +13,7 @@ document.addEventListener('change', (event) => {
     }
 });
 
-function inputRangeFilter(event: Event) {
+function inputRangeFilter(event: Event): void {
     let minValue = '';
     let maxValue = '';
     let value = '';
@@ -80,7 +80,7 @@ function createQueryUrlForRange(key: string, value: string): string {
     return result;
 }
 
-export function checkAllProductsAndUpdateSliderPrice() {
+export function checkAllProductsAndUpdateSliderPrice(): void {
     const priceArr: number[] = filteredProducts.map((el) => el.price);
     const fromSliderPrice: HTMLInputElement | null = document.getElementById('fromSlider-price') as HTMLInputElement;
     const toSliderPrice: HTMLInputElement | null = document.getElementById('toSlider-price') as HTMLInputElement;
@@ -96,7 +96,7 @@ export function checkAllProductsAndUpdateSliderPrice() {
     }
 }
 
-export function checkAllProductsAndUpdateSliderStock() {
+export function checkAllProductsAndUpdateSliderStock(): void {
     const stockArr: number[] = filteredProducts.map((el) => el.stock);
     const fromSliderStock: HTMLInputElement | null = document.getElementById('fromSlider-stock') as HTMLInputElement;
     const toSliderStock: HTMLInputElement | null = document.getElementById('toSlider-stock') as HTMLInputElement;

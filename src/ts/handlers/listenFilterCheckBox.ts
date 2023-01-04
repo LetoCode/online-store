@@ -2,6 +2,8 @@ import { updateProducts } from '../view/updateViewQueryParams';
 import { filteredProducts } from '../view/updateViewQueryParams';
 import { Products } from '../types/types';
 import { checkAllProductsAndUpdateSliderPrice, checkAllProductsAndUpdateSliderStock } from './listenSlider';
+import { addBtnListeners } from '..';
+import { restoreCart } from '../view/showCartDataOnMainPage';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';
@@ -15,6 +17,8 @@ document.addEventListener('click', (event: MouseEvent) => {
             const url = createQueryUrlForCheckbox(target, mode);
             window.history.pushState({}, '', url);
             updateProducts();
+            restoreCart();
+            addBtnListeners();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
             checkAllProductsAndUpdateSliderStock();
@@ -34,6 +38,7 @@ function createQueryUrlForCheckbox(target: HTMLElement, mode: string): string {
         params = new URLSearchParams(search);
     } else {
         params = new URLSearchParams();
+        params.append('index', 'page');
     }
     if (key && value) {
         if (mode === 'del') {
@@ -51,7 +56,7 @@ function createQueryUrlForCheckbox(target: HTMLElement, mode: string): string {
     return result;
 }
 
-export function checkCountAllProductsAndUpdateCountOnPage() {
+export function checkCountAllProductsAndUpdateCountOnPage(): void {
     const elementCounts: NodeListOf<Element> | null = document.querySelectorAll('.element__current-count');
     if (elementCounts) {
         for (const selector of elementCounts) {

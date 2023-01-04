@@ -114,7 +114,6 @@ export function updateProducts(): void {
         }
         showProducts(filteredProducts, sorting);
     } else {
-        filteredProducts = productsArrayRaw;
         showProducts(productsArrayRaw, sorting);
     }
 }

@@ -20,13 +20,10 @@ import {
 } from './view/showCartDataOnMainPage';
 
 export const productsArrayRaw: Products[] = getAllProducts();
-let listenersAdded: boolean;
-
 window.addEventListener('DOMContentLoaded', handleLocation);
 window.addEventListener('popstate', handleLocation);
 
 export function windowLoad(): void {
-    const mainLoading: HTMLElement | null = document.querySelector('.main__loading _active');
     renderAllFilters();
     updateFiltersView();
     updateProducts();
@@ -34,10 +31,7 @@ export function windowLoad(): void {
     checkAllProductsAndUpdateSliderPrice();
     checkAllProductsAndUpdateSliderStock();
     restoreCart();
-    if (!listenersAdded) {
-        addListeners();
-    }
-    if (mainLoading) mainLoading.classList.remove('_active');
+    addListeners();
 }
 
 function addListeners(): void {
@@ -47,6 +41,7 @@ function addListeners(): void {
             const firstURL: string = window.location.href.split('?')[0];
             window.history.pushState({}, '', firstURL);
             updateProducts();
+            restoreCart();
             updateFiltersView();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
@@ -63,35 +58,6 @@ function addListeners(): void {
         });
     }
 
-    //         if (
-    //             (event.target as HTMLElement).closest('.btn__add') ||
-    //             (event.target as HTMLElement).closest('.btn__added__plus')
-    //         ) {
-    //             const id: string | undefined = (event.target as HTMLElement).dataset.productId;
-    //             if (id) {
-    //                 addToStorage(id, 1);
-    //                 const cartInfo = new Map();
-    //                 cartInfo.set(id, 1);
-    //                 showCartDataInProductGrid(cartInfo);
-    //                 showCartDataInHeader();
-    //                 showCartTotalSumInHeader();
-    //             }
-    //         }
-
-    //         if ((event.target as HTMLElement).closest('.btn__added__minus')) {
-    //             const id: string | undefined = (event.target as HTMLElement).dataset.productId;
-    //             if (id) {
-    //                 addToStorage(id, -1);
-    //                 const cartInfo = new Map();
-    //                 cartInfo.set(id, -1);
-    //                 showCartDataInProductGrid(cartInfo);
-    //                 showCartDataInHeader();
-    //                 showCartTotalSumInHeader();
-    //             }
-    //         }
-    //     });
-    // }
-
     addBtnListeners();
 
     const btnCopyLink: HTMLElement | null = document.getElementById('btn-copy-link');
@@ -99,14 +65,19 @@ function addListeners(): void {
         btnCopyLink.addEventListener('click', () => {
             const url: string = window.location.href;
             navigator.clipboard.writeText(url);
-            btnCopyLink.setAttribute('title', 'Link has copied!!!');
+            btnCopyLink.innerText = 'Got It!';
             setTimeout(() => {
-                btnCopyLink.removeAttribute('title');
+                btnCopyLink.innerText = 'Copy Link';
             }, 2000);
         });
     }
 
-    listenersAdded = true;
+    const btnCart: HTMLElement | null = document.getElementById('cart-link');
+    if (btnCart) {
+        btnCart.addEventListener('click', (event) => {
+            handleLocation(event, event.currentTarget);
+        });
+    }
 }
 
 export function addBtnListeners(): void {
@@ -114,6 +85,7 @@ export function addBtnListeners(): void {
     if (productButtons) {
         productButtons.forEach((element) => {
             element.addEventListener('click', (event) => {
+                console.log('add');
                 if (
                     (event.target as HTMLElement).closest('.btn__add') ||
                     (event.target as HTMLElement).closest('.btn__added__plus')

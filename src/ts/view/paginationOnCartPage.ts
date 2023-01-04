@@ -6,7 +6,7 @@ export let howManyPages: number;
 export let start: number;
 export let end: number;
 
-export function setPaginationSettings(thisPage = 1) {
+export function setPaginationSettings(thisPage = 1): void {
     const rowsValue: string = (document.getElementById('cart-items-on-page') as HTMLInputElement)?.value;
     let rows = 3;
     if (rowsValue) {
@@ -20,14 +20,14 @@ export function setPaginationSettings(thisPage = 1) {
     end = start + rows;
 }
 
-export function changeCartItemsOnPagePagination() {
+export function changeCartItemsOnPagePagination(): void {
     const cartPageNumber: HTMLElement | null = document.getElementById('cart-page-number');
     const thisPage = +(cartPageNumber as HTMLInputElement).value;
     setPaginationSettings(thisPage);
     showCartItems();
 }
 
-export function changePagePagination(event: Event) {
+export function changePagePagination(event: Event): void {
     let direction = 0;
     const cartPageNumber: HTMLElement | null = document.getElementById('cart-page-number');
     const currentValue: number = +(cartPageNumber as HTMLInputElement).value;
