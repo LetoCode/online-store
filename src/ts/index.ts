@@ -38,7 +38,6 @@ export function windowLoad(): void {
         addListeners();
     }
     if (mainLoading) mainLoading.classList.remove('_active');
-
 }
 
 function addListeners(): void {
@@ -61,34 +60,39 @@ function addListeners(): void {
             if ((event.target as HTMLElement).closest('.btn__details')) {
                 handleLocation(event);
             }
-            if (
-                (event.target as HTMLElement).closest('.btn__add') ||
-                (event.target as HTMLElement).closest('.btn__added__plus')
-            ) {
-                const id: string | undefined = (event.target as HTMLElement).dataset.productId;
-                if (id) {
-                    addToStorage(id, 1);
-                    const cartInfo = new Map();
-                    cartInfo.set(id, 1);
-                    showCartDataInProductGrid(cartInfo);
-                    showCartDataInHeader();
-                    showCartTotalSumInHeader();
-                }
-            }
-
-            if ((event.target as HTMLElement).closest('.btn__added__minus')) {
-                const id: string | undefined = (event.target as HTMLElement).dataset.productId;
-                if (id) {
-                    addToStorage(id, -1);
-                    const cartInfo = new Map();
-                    cartInfo.set(id, -1);
-                    showCartDataInProductGrid(cartInfo);
-                    showCartDataInHeader();
-                    showCartTotalSumInHeader();
-                }
-            }
         });
     }
+
+    //         if (
+    //             (event.target as HTMLElement).closest('.btn__add') ||
+    //             (event.target as HTMLElement).closest('.btn__added__plus')
+    //         ) {
+    //             const id: string | undefined = (event.target as HTMLElement).dataset.productId;
+    //             if (id) {
+    //                 addToStorage(id, 1);
+    //                 const cartInfo = new Map();
+    //                 cartInfo.set(id, 1);
+    //                 showCartDataInProductGrid(cartInfo);
+    //                 showCartDataInHeader();
+    //                 showCartTotalSumInHeader();
+    //             }
+    //         }
+
+    //         if ((event.target as HTMLElement).closest('.btn__added__minus')) {
+    //             const id: string | undefined = (event.target as HTMLElement).dataset.productId;
+    //             if (id) {
+    //                 addToStorage(id, -1);
+    //                 const cartInfo = new Map();
+    //                 cartInfo.set(id, -1);
+    //                 showCartDataInProductGrid(cartInfo);
+    //                 showCartDataInHeader();
+    //                 showCartTotalSumInHeader();
+    //             }
+    //         }
+    //     });
+    // }
+
+    addBtnListeners();
 
     const btnCopyLink: HTMLElement | null = document.getElementById('btn-copy-link');
     if (btnCopyLink) {
@@ -103,4 +107,40 @@ function addListeners(): void {
     }
 
     listenersAdded = true;
+}
+
+export function addBtnListeners(): void {
+    const productButtons: NodeList = document.querySelectorAll('.product__buttons');
+    if (productButtons) {
+        productButtons.forEach((element) => {
+            element.addEventListener('click', (event) => {
+                if (
+                    (event.target as HTMLElement).closest('.btn__add') ||
+                    (event.target as HTMLElement).closest('.btn__added__plus')
+                ) {
+                    const id: string | undefined = (event.target as HTMLElement).dataset.productId;
+                    if (id) {
+                        addToStorage(id, 1);
+                        const cartInfo = new Map();
+                        cartInfo.set(id, 1);
+                        showCartDataInProductGrid(cartInfo);
+                        showCartDataInHeader();
+                        showCartTotalSumInHeader();
+                    }
+                }
+
+                if ((event.target as HTMLElement).closest('.btn__added__minus')) {
+                    const id: string | undefined = (event.target as HTMLElement).dataset.productId;
+                    if (id) {
+                        addToStorage(id, -1);
+                        const cartInfo = new Map();
+                        cartInfo.set(id, -1);
+                        showCartDataInProductGrid(cartInfo);
+                        showCartDataInHeader();
+                        showCartTotalSumInHeader();
+                    }
+                }
+            });
+        });
+    }
 }

@@ -111,3 +111,19 @@ a.btn__details {
     display: grid;
     place-content: center;
 }
+
+.product__price-block {
+    & .btn {
+        width: 100%;
+        padding: 7% 0;
+        background: #9a3535;
+        color: $color-additional;
+        border: 2px solid $color-primary;
+        border-radius: 0.3rem;
+    }
+
+    & .btn__added__container {
+        width: 100%;
+        height: auto;
+    }
+}

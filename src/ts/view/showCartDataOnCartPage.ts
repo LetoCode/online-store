@@ -41,6 +41,10 @@ export function showCartPage(): void {
     } else {
         showEmptyCart(true);
     }
+
+    if (window.location.pathname.includes('buy')) {
+        popupOpen();
+    }
 }
 
 function fillProductsInCartAndProductsCountMap() {
