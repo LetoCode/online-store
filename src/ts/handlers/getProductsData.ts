@@ -34,7 +34,9 @@ export function getProductsWithParams(key: string, value: string[], products: Pr
     return result;
 }
 
-export function getCurrentFilterInfo(productsArray: Products[]) {
+export function getCurrentFilterInfo(
+    productsArray: Products[]
+): [string[], string[], number, number, number, number, Map<string, number>, Map<string, number>] {
     const categoriesNames: string[] = [];
     const brandsNames: string[] = [];
     const prices: number[] = [];

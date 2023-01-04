@@ -10,10 +10,9 @@ const baseConfig = {
     entry: path.resolve(__dirname, './src/ts/index'),
     //mode: 'development',
     output: {
-        //publicPath: 'dist',
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
-        //assetModuleFilename: 'src/assets/images/[name].[ext]',
+        assetModuleFilename: '[name][ext]',
     },
     optimization: {
         minimize: false
@@ -66,6 +65,10 @@ const baseConfig = {
         new CopyPlugin({
             patterns: [
                 { from: './src/public' },
+                // {
+                //     from: './src/assets',
+                //     to: './',
+                // },
             ],
         }),
     ],

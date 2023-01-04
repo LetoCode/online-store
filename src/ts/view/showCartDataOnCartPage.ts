@@ -43,7 +43,7 @@ export function showCartPage(): void {
     }
 }
 
-function fillProductsInCartAndProductsCountMap() {
+function fillProductsInCartAndProductsCountMap(): void {
     const storageString: string = getStorage('O-S-cart-now');
     const storageArr = storageString.split('/');
     productsInCart.length = 0;
@@ -111,7 +111,7 @@ function showCartItem(product: Products, productCount: number, elementNumber: nu
             '.item-image__link'
         );
         if (itemImageLink) {
-            itemImageLink.href = `/#${product.category}/${product.brand}/id=${product.id}`;
+            itemImageLink.href = `/?${product.category}/${product.brand}/id=${product.id}`;
             const imageBg = product.images[product.images.length - 1];
             itemImageLink.style.background = `url(${imageBg}) 0% 0% / cover`;
         }
@@ -296,13 +296,10 @@ function productsCartItemsListener(event: Event): void {
     }
 }
 
-function changeSumOfProduct(id: string, addProduct: number) {
+function changeSumOfProduct(id: string, addProduct: number): void {
     const itemPrice: HTMLElement | null = document.querySelector(`.item-control__price[data-product-id="${id}"]`);
     const product = productsInCart.find((el) => el.id === +id);
     const productCount = productsCountMap.get(+id);
-    console.log('product', product);
-    console.log('productCount', productCount);
-    console.log('itemPrice', product);
     if (itemPrice && product)
         itemPrice.textContent = (product.price * (productCount + addProduct)).toLocaleString('en', {
             style: 'currency',

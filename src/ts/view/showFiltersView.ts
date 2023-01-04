@@ -1,7 +1,7 @@
 import { getCurrentFilterInfo } from '../handlers/getProductsData';
 import { productsArrayRaw } from '../index';
 
-export function renderAllFilters() {
+export function renderAllFilters(): void {
     //get all info about products and show all filters and product list
 
     const [

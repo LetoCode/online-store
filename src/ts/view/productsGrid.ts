@@ -1,6 +1,6 @@
 import { Products } from '../types/types';
 
-export function showProducts(productsArray: Products[], sorting: string) {
+export function showProducts(productsArray: Products[], sorting: string): void {
     switch (sorting) {
         case 'rating':
             productsArray.sort((a, b) => b.rating - a.rating);
@@ -87,7 +87,7 @@ export function showProducts(productsArray: Products[], sorting: string) {
 
             btnDetails.classList.add('btn');
             btnDetails.classList.add('btn__details');
-            btnDetails.setAttribute('href', `/#${product.category}/${product.brand}/id=${product.id}`);
+            btnDetails.setAttribute('href', `/?${product.category}/${product.brand}/id=${product.id}`);
             btnDetails.textContent = 'Details';
             productButtons.append(btnDetails);
         });

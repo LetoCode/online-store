@@ -1,6 +1,6 @@
 import { getStockOfProduct } from './getProductsData';
 
-export function addToStorage(id: string, count: number) {
+export function addToStorage(id: string, count: number): void {
     let item: string = getStorage('O-S-cart-now');
     if (item) {
         const storageArr = item.split('/');

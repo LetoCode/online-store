@@ -34,6 +34,7 @@ function createQueryUrlForCheckbox(target: HTMLElement, mode: string): string {
         params = new URLSearchParams(search);
     } else {
         params = new URLSearchParams();
+        params.append('index', 'page');
     }
     if (key && value) {
         if (mode === 'del') {
@@ -51,7 +52,7 @@ function createQueryUrlForCheckbox(target: HTMLElement, mode: string): string {
     return result;
 }
 
-export function checkCountAllProductsAndUpdateCountOnPage() {
+export function checkCountAllProductsAndUpdateCountOnPage(): void {
     const elementCounts: NodeListOf<Element> | null = document.querySelectorAll('.element__current-count');
     if (elementCounts) {
         for (const selector of elementCounts) {

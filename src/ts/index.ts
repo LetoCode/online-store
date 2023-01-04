@@ -20,13 +20,10 @@ import {
 } from './view/showCartDataOnMainPage';
 
 export const productsArrayRaw: Products[] = getAllProducts();
-let listenersAdded: boolean;
-
 window.addEventListener('DOMContentLoaded', handleLocation);
 window.addEventListener('popstate', handleLocation);
 
 export function windowLoad(): void {
-    const mainLoading: HTMLElement | null = document.querySelector('.main__loading _active');
     renderAllFilters();
     updateFiltersView();
     updateProducts();
@@ -34,11 +31,7 @@ export function windowLoad(): void {
     checkAllProductsAndUpdateSliderPrice();
     checkAllProductsAndUpdateSliderStock();
     restoreCart();
-    if (!listenersAdded) {
-        addListeners();
-    }
-    if (mainLoading) mainLoading.classList.remove('_active');
-
+    addListeners();
 }
 
 function addListeners(): void {
@@ -102,5 +95,10 @@ function addListeners(): void {
         });
     }
 
-    listenersAdded = true;
+    const btnCart: HTMLElement | null = document.getElementById('cart-link');
+    if (btnCart) {
+        btnCart.addEventListener('click', (event) => {
+            handleLocation(event, event.currentTarget);
+        });
+    }
 }

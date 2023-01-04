@@ -25,7 +25,7 @@ document.addEventListener('keydown', keyDownEscape);
 
 //+++++++++++++++++++++++++++++++listeners++++++++++++++++++++++++++++++++++++++++++++
 //--------------------------------key Escape------------------------------------------------
-function keyDownEscape(event: Event) {
+function keyDownEscape(event: Event): void {
     if ((event as KeyboardEvent).code === 'Escape') {
         const popupActive: HTMLElement | null = document.querySelector('.popup._open');
         if (popupActive) popupClose();
@@ -33,7 +33,7 @@ function keyDownEscape(event: Event) {
 }
 
 //--------------------------------close popup------------------------------------------------
-function closeThisPopup(event: Event) {
+function closeThisPopup(event: Event): void {
     if (!(event.target as HTMLElement).closest('.popup__content')) {
         popupClose();
     }
@@ -218,7 +218,7 @@ function checkValidity(selectorName: string, checkingRegExp: RegExp): boolean {
     return result;
 }
 
-function changePayingSystemLogo(firstLetter: string) {
+function changePayingSystemLogo(firstLetter: string): void {
     const payingSystemLogo: HTMLElement | null = document.getElementById('paying-system-logo');
     if (payingSystemLogo) {
         payingSystemLogo.setAttribute('src', noPaySystemLogo);
