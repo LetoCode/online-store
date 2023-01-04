@@ -90,6 +90,12 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        & > .product__buttons {
+            position: static;
+            display: block;
+            height: auto;
+        }
     }
 
     &__price {
