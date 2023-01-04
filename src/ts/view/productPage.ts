@@ -1,14 +1,31 @@
-import { productsArrayRaw } from '../index';
+import { addBtnListeners, productsArrayRaw } from '../index';
 import { Products } from '../types/types';
+import { popupOpen } from './popup';
+import { setBtnAdd } from './productsGrid';
+import { restoreCart } from './showCartDataOnMainPage';
 
 export function fillProductDetails(href: string): void {
     const productHref = href.split('/');
-    //const productId = Number(productHref[productHref.length - 1]) - 1;
-    //const currProduct = productsArrayRaw[productId];
     const productId: string | undefined = productHref.at(-1)?.slice(3);
     if (productId) {
         const productIdNumber: number = +productId;
         const currProduct: Products | undefined = productsArrayRaw.find((el) => el.id === productIdNumber);
+        const productButtons: HTMLElement | null = document.querySelector('.product__buttons');
+        const btnBuy = document.createElement('button');
+
+        if (productButtons) {
+            setBtnAdd(productButtons, currProduct);
+            addBtnListeners();
+            restoreCart();
+
+            productButtons.append(btnBuy);
+            btnBuy.classList.add('btn');
+            btnBuy.classList.add('btn__product-buy');
+            btnBuy.textContent = 'Buy Now';
+            btnBuy.addEventListener('click', () => {
+                window.location.href = '/cart&buy';
+            });
+        }
 
         if (currProduct) {
             fillBreadcrumb(currProduct);
