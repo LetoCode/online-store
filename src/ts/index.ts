@@ -2,6 +2,7 @@ import '../scss/style.scss';
 import './handlers/listenFilterCheckBox';
 import './handlers/listenSlider';
 import './handlers/listenSorting';
+import './handlers/listenSearch';
 import './view/updateSortView';
 import '../assets/.htaccess';
 import { Products } from './types/types';

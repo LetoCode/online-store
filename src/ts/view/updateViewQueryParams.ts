@@ -16,6 +16,7 @@ export function updateFiltersView(): void {
         '#category-filter .filter-block__body__element input'
     );
     const brands: NodeListOf<Element> = document.querySelectorAll('#brand-filter .filter-block__body__element input');
+    const searchInput: HTMLInputElement | null = document.querySelector('.sort__search-input');
     if (search) {
         const params: URLSearchParams = new URLSearchParams(search);
         const paramsKeys: string[] = Array.from(params.keys());
@@ -61,6 +62,14 @@ export function updateFiltersView(): void {
                 showStockFilter(minValue as number, maxValue as number, false);
             }
         }
+
+        // search
+        if (paramsKeys.includes('search')) {
+            const valueInd = paramsKeys.indexOf('search');
+            if (searchInput) {
+                searchInput.value = paramsValues[valueInd];
+            }
+        }
     } else {
         for (const el of categories) {
             (el as HTMLInputElement).checked = false;
@@ -80,10 +89,11 @@ export function updateProducts(): void {
         const params: URLSearchParams = new URLSearchParams(search);
         const categoryParams: string[] = [];
         const brandParams: string[] = [];
+        const searchParams: string[] = [];
         let priceParams: string[] = [];
         let stockParams: string[] = [];
         params.forEach((value, key) => {
-            if (key !== 'price' && key !== 'stock') {
+            if (key !== 'price' && key !== 'stock' && key !== 'search') {
                 [value, key] = [key, value];
             }
             if (key === 'category') {
@@ -98,6 +108,9 @@ export function updateProducts(): void {
             if (key === 'stock') {
                 stockParams = [value.split('*')[0], value.split('*')[1]];
             }
+            if (key === 'search') {
+                searchParams.push(value);
+            }
         });
 
         if (categoryParams.length > 0) {
@@ -111,6 +124,9 @@ export function updateProducts(): void {
         }
         if (stockParams.length > 0) {
             filteredProducts = getProductsWithParams('stock', stockParams, filteredProducts);
+        }
+        if (searchParams.length > 0) {
+            filteredProducts = getProductsWithParams('search', searchParams, filteredProducts);
         }
         showProducts(filteredProducts, sorting);
     } else {

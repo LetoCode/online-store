@@ -23,6 +23,22 @@ export function getProductsWithParams(key: string, value: string[], products: Pr
                 return el;
             }
         });
+    } else if (key === 'search') {
+        result = products.filter((el) => {
+            const item = (
+                el.title +
+                el.description +
+                el.price +
+                el.discountPercentage +
+                el.rating +
+                el.stock +
+                el.brand +
+                el.category
+            ).toLowerCase();
+            if (item.includes(value[0].toLowerCase())) {
+                return el;
+            }
+        });
     } else {
         result = products.filter((el) => {
             if (value.includes(el[key as keyof Products] as string)) {
