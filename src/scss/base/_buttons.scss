@@ -5,11 +5,10 @@
         background-color: $color-bg-title;
         border: 1px solid $color-primary;
         border-radius: 0.3rem;
-        padding-left: 2%;
-        padding-right: 2%;
-        // font-size: 80%;
+        padding: 2%;
         color: $color-primary;
         text-transform: uppercase;
+        overflow: hidden;
     }
 
     &__product-add,
