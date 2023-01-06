@@ -1,6 +1,6 @@
+import { addBtnListeners } from '..';
+import { restoreCart } from '../view/showCartDataOnMainPage';
 import { updateProducts } from '../view/updateViewQueryParams';
-
-export let sorting = 'none';
 
 document.addEventListener('change', (event: Event) => {
     const target: HTMLSelectElement | null = (event.target as HTMLElement).closest('.sort__select');
@@ -8,6 +8,8 @@ document.addEventListener('change', (event: Event) => {
         const url = createQueryUrlForSorting(target);
         window.history.pushState({}, '', url);
         updateProducts();
+        restoreCart();
+        addBtnListeners();
     }
 });
 
@@ -15,11 +17,10 @@ function createQueryUrlForSorting(target: HTMLSelectElement): string {
     const fullURL: string = window.location.href;
     const firstURL: string = fullURL.split('?')[0];
     const search: string = window.location.search;
-    const key: string | undefined = target.value;
-    const value = 'sort';
+    const key = 'sort';
+    const value: string | undefined = target.value;
     let params: URLSearchParams;
     let result = '';
-    sorting = key;
 
     if (search) {
         params = new URLSearchParams(search);
@@ -28,7 +29,7 @@ function createQueryUrlForSorting(target: HTMLSelectElement): string {
         params.append('index', 'page');
     }
     if (key && value) {
-        params.set(value, key);
+        params.set(key, value);
 
         if (params.toString().length === 0) {
             result = firstURL;
