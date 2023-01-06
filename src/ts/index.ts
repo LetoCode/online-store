@@ -3,6 +3,7 @@ import './handlers/listenFilterCheckBox';
 import './handlers/listenSlider';
 import './handlers/listenSorting';
 import './handlers/listenSearch';
+import './handlers/listenViewMode';
 import './view/updateSortView';
 import '../assets/.htaccess';
 import { Products } from './types/types';

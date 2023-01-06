@@ -8,6 +8,7 @@ import { sorting } from '../handlers/listenSorting';
 
 //=============================listen history changes and use filers if they were==================
 export let filteredProducts: Products[];
+let bigMode: boolean;
 
 export function updateFiltersView(): void {
     //if query parameters are, then we have to update our filters
@@ -70,6 +71,11 @@ export function updateFiltersView(): void {
                 searchInput.value = paramsValues[valueInd];
             }
         }
+
+        // view mode
+        if (search.includes('big=false')) {
+            bigMode = false;
+        }
     } else {
         for (const el of categories) {
             (el as HTMLInputElement).checked = false;
@@ -93,7 +99,7 @@ export function updateProducts(): void {
         let priceParams: string[] = [];
         let stockParams: string[] = [];
         params.forEach((value, key) => {
-            if (key !== 'price' && key !== 'stock' && key !== 'search') {
+            if (key !== 'price' && key !== 'stock' && key !== 'search' && key !== 'big') {
                 [value, key] = [key, value];
             }
             if (key === 'category') {
@@ -110,6 +116,12 @@ export function updateProducts(): void {
             }
             if (key === 'search') {
                 searchParams.push(value);
+            }
+            if (key === 'big' && value === 'false') {
+                bigMode = false;
+            }
+            if (key === 'big' && value === 'true') {
+                bigMode = true;
             }
         });
 
@@ -128,8 +140,8 @@ export function updateProducts(): void {
         if (searchParams.length > 0) {
             filteredProducts = getProductsWithParams('search', searchParams, filteredProducts);
         }
-        showProducts(filteredProducts, sorting);
+        showProducts(filteredProducts, sorting, bigMode);
     } else {
-        showProducts(productsArrayRaw, sorting);
+        showProducts(productsArrayRaw, sorting, bigMode);
     }
 }

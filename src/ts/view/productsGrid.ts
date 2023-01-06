@@ -1,6 +1,13 @@
 import { Products } from '../types/types';
 
-export function showProducts(productsArray: Products[], sorting: string): void {
+export function showProducts(productsArray: Products[], sorting: string, bigMode = true): void {
+    const productsItems: HTMLElement | null = document.querySelector('.products__items');
+    const viewSmall = document.querySelector('.sort__view-small');
+    const viewBig = document.querySelector('.sort__view-big');
+
+    viewSmall?.classList.add('_active');
+    viewBig?.classList.remove('_active');
+
     switch (sorting) {
         case 'rating':
             productsArray.sort((a, b) => b.rating - a.rating);
@@ -13,7 +20,6 @@ export function showProducts(productsArray: Products[], sorting: string): void {
             break;
     }
 
-    const productsItems: HTMLElement | null = document.querySelector('.products__items');
     if (productsItems) {
         productsItems.innerHTML = '';
         productsArray.forEach((product) => {
@@ -23,7 +29,7 @@ export function showProducts(productsArray: Products[], sorting: string): void {
             const productButtons = document.createElement('div');
             const btnDetails = document.createElement('a');
 
-            if (productsItems) productsItems.append(productItem);
+            productsItems.append(productItem);
             productItem.classList.add('product');
 
             const imageBg = product.images[product.images.length - 1];
@@ -33,22 +39,28 @@ export function showProducts(productsArray: Products[], sorting: string): void {
             productTitle.classList.add('product__title');
             productTitle.textContent = `${product.title}`;
 
-            productItem.append(productInfo);
-            productInfo.classList.add('product__info');
+            if (bigMode) {
+                viewBig?.classList.add('_active');
+                viewSmall?.classList.remove('_active');
+                productItem.classList.add('_big');
 
-            const infoContent = [
-                `Category: ${product.category}`,
-                `Brand: ${product.brand}`,
-                `Price: €${product.price}`,
-                `Discount: ${product.discountPercentage}%`,
-                `Rating: ${product.rating}`,
-                `Stock: ${product.stock}`,
-            ];
-            for (let i = 0; i < 6; i++) {
-                const productInfoItem = document.createElement('p');
-                productInfo.append(productInfoItem);
-                productInfoItem.classList.add('product__info-item');
-                productInfoItem.textContent = infoContent[i];
+                productItem.append(productInfo);
+                productInfo.classList.add('product__info');
+
+                const infoContent = [
+                    `Category: ${product.category}`,
+                    `Brand: ${product.brand}`,
+                    `Price: €${product.price}`,
+                    `Discount: ${product.discountPercentage}%`,
+                    `Rating: ${product.rating}`,
+                    `Stock: ${product.stock}`,
+                ];
+                for (let i = 0; i < 6; i++) {
+                    const productInfoItem = document.createElement('p');
+                    productInfo.append(productInfoItem);
+                    productInfoItem.classList.add('product__info-item');
+                    productInfoItem.textContent = infoContent[i];
+                }
             }
 
             productItem.append(productButtons);
