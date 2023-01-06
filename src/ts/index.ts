@@ -10,7 +10,7 @@ import { Products } from './types/types';
 import { updateProducts, updateFiltersView } from './view/updateViewQueryParams';
 import { renderAllFilters } from './view/showFiltersView';
 import { handleLocation } from './route/routing';
-import { getAllProducts } from './handlers/getProductsData';
+import { getAllProducts, updateFilterFoundView } from './handlers/getProductsData';
 import { checkCountAllProductsAndUpdateCountOnPage } from './handlers/listenFilterCheckBox';
 import { checkAllProductsAndUpdateSliderPrice, checkAllProductsAndUpdateSliderStock } from './handlers/listenSlider';
 import { addToStorage } from './handlers/storage';
@@ -33,6 +33,7 @@ export function windowLoad(): void {
     checkAllProductsAndUpdateSliderPrice();
     checkAllProductsAndUpdateSliderStock();
     restoreCart();
+    updateFilterFoundView();
     addListeners();
 }
 
@@ -44,7 +45,9 @@ function addListeners(): void {
             window.history.pushState({}, '', firstURL);
             updateProducts();
             restoreCart();
+            addBtnListeners();
             updateFiltersView();
+            updateFilterFoundView();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
             checkAllProductsAndUpdateSliderStock();
@@ -87,7 +90,6 @@ export function addBtnListeners(): void {
     if (productButtons) {
         productButtons.forEach((element) => {
             element.addEventListener('click', (event) => {
-                console.log('add');
                 if (
                     (event.target as HTMLElement).closest('.btn__add') ||
                     (event.target as HTMLElement).closest('.btn__added__plus')

@@ -4,6 +4,7 @@ import { Products } from '../types/types';
 import { checkAllProductsAndUpdateSliderPrice, checkAllProductsAndUpdateSliderStock } from './listenSlider';
 import { addBtnListeners } from '..';
 import { restoreCart } from '../view/showCartDataOnMainPage';
+import { updateFilterFoundView } from './getProductsData';
 
 document.addEventListener('click', (event: MouseEvent) => {
     let mode = 'del';
@@ -18,6 +19,7 @@ document.addEventListener('click', (event: MouseEvent) => {
             window.history.pushState({}, '', url);
             updateProducts();
             restoreCart();
+            updateFilterFoundView();
             addBtnListeners();
             checkCountAllProductsAndUpdateCountOnPage();
             checkAllProductsAndUpdateSliderPrice();
