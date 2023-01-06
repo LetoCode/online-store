@@ -1,6 +1,7 @@
 import products from '../data/products.json';
 import { Products } from '../types/types';
 import { productsArrayRaw } from '../index';
+import { filteredProducts } from '../view/updateViewQueryParams';
 
 export function getAllProducts(): Products[] {
     return Object.values(products)[0];
@@ -103,4 +104,12 @@ export function getCurrentFilterInfo(
 export function getStockOfProduct(id: number): number {
     const el: Products | undefined = productsArrayRaw.find((el) => el.id === id);
     return el ? el.stock : 0;
+}
+
+export function updateFilterFoundView(): void {
+    const sortFound: HTMLElement | null = document.querySelector('.sort__found');
+    const counterArr: Products[] = filteredProducts || productsArrayRaw;
+    if (sortFound) {
+        sortFound.innerText = `Found: ${counterArr.length}`;
+    }
 }

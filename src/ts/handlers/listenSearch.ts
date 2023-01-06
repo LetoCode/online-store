@@ -1,6 +1,7 @@
 import { addBtnListeners } from '..';
 import { restoreCart } from '../view/showCartDataOnMainPage';
 import { updateProducts } from '../view/updateViewQueryParams';
+import { updateFilterFoundView } from './getProductsData';
 
 document.addEventListener('input', (event: Event) => {
     const target: HTMLInputElement | null = (event.target as HTMLElement).closest('.sort__search-input');
@@ -9,6 +10,7 @@ document.addEventListener('input', (event: Event) => {
         window.history.pushState({}, '', url);
         updateProducts();
         restoreCart();
+        updateFilterFoundView();
         addBtnListeners();
     }
 });

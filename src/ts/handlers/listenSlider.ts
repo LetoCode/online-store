@@ -1,5 +1,8 @@
+import { addBtnListeners } from '..';
+import { restoreCart } from '../view/showCartDataOnMainPage';
 import { updateProducts } from '../view/updateViewQueryParams';
 import { filteredProducts } from '../view/updateViewQueryParams';
+import { updateFilterFoundView } from './getProductsData';
 import { checkCountAllProductsAndUpdateCountOnPage } from './listenFilterCheckBox';
 
 document.addEventListener('change', (event) => {
@@ -47,6 +50,9 @@ function inputRangeFilter(event: Event): void {
     const url = createQueryUrlForRange(key, value);
     window.history.pushState({}, '', url);
     updateProducts();
+    restoreCart();
+    updateFilterFoundView();
+    addBtnListeners();
 
     if ((event.target as HTMLInputElement).dataset.filterKey === 'price') {
         checkAllProductsAndUpdateSliderStock();

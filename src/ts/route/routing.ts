@@ -6,43 +6,6 @@ import { showCartDataInHeader, showCartTotalSumInHeader } from '../view/showCart
 export function handleLocation(event: Event, eventTarget: EventTarget | null = null): void {
     const search: string = window.location.search;
     const targetOfEvent: EventTarget | null = eventTarget || event.target;
-    // if (search) {
-    //     const html: Node = getHTML('index');
-    //     const main: HTMLElement | null = document.querySelector('.main');
-    //     if (main) {
-    //         main.innerHTML = '';
-    //         main.appendChild(html);
-    //         windowLoad();
-    //     }
-    // } else {
-    //     let href;
-    //     if (targetOfEvent instanceof HTMLAnchorElement) {
-    //         href = targetOfEvent.href;
-    //     } else {
-    //         href = window.location.pathname;
-    //     }
-    //     window.history.pushState({}, '', href);
-    //     event.preventDefault();
-    //     event.stopImmediatePropagation();
-    //     if (href) {
-    //         const route = getRoute(href);
-    //         const html: Node = getHTML(route);
-    //         const main: HTMLElement | null = document.querySelector('.main');
-    //         if (main) {
-    //             main.innerHTML = '';
-    //             main.appendChild(html);
-    //             if (href.includes('id=')) {
-    //                 fillProductDetails(href);
-    //             }
-    //             if (route === 'index') {
-    //                 windowLoad();
-    //             }
-    //             if (route === 'cart_page') {
-    //                 showCartPage();
-    //             }
-    //         }
-    //     }
-    // }
 
     if (search) {
         const main: HTMLElement | null = document.querySelector('.main');
