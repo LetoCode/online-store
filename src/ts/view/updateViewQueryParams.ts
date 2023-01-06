@@ -4,10 +4,10 @@ import { showPriceFilter, showStockFilter } from './showFiltersView';
 import { showProducts } from './productsGrid';
 import { productsArrayRaw } from '../index';
 import { renderAllFilters } from './showFiltersView';
-import { sorting } from '../handlers/listenSorting';
 
 //=============================listen history changes and use filers if they were==================
 export let filteredProducts: Products[];
+let sorting: string;
 let bigMode: boolean;
 
 export function updateFiltersView(): void {
@@ -17,6 +17,7 @@ export function updateFiltersView(): void {
         '#category-filter .filter-block__body__element input'
     );
     const brands: NodeListOf<Element> = document.querySelectorAll('#brand-filter .filter-block__body__element input');
+    const sortSelect: HTMLSelectElement | null = document.querySelector('.sort__select');
     const searchInput: HTMLInputElement | null = document.querySelector('.sort__search-input');
     if (search) {
         const params: URLSearchParams = new URLSearchParams(search);
@@ -64,6 +65,14 @@ export function updateFiltersView(): void {
             }
         }
 
+        // sorting
+        if (paramsKeys.includes('sort')) {
+            const valueInd = paramsKeys.indexOf('sort');
+            if (sortSelect) {
+                sortSelect.value = paramsValues[valueInd];
+            }
+        }
+
         // search
         if (paramsKeys.includes('search')) {
             const valueInd = paramsKeys.indexOf('search');
@@ -99,7 +108,7 @@ export function updateProducts(): void {
         let priceParams: string[] = [];
         let stockParams: string[] = [];
         params.forEach((value, key) => {
-            if (key !== 'price' && key !== 'stock' && key !== 'search' && key !== 'big') {
+            if (key !== 'price' && key !== 'stock' && key !== 'sort' && key !== 'search' && key !== 'big') {
                 [value, key] = [key, value];
             }
             if (key === 'category') {
@@ -113,6 +122,9 @@ export function updateProducts(): void {
             }
             if (key === 'stock') {
                 stockParams = [value.split('*')[0], value.split('*')[1]];
+            }
+            if (key === 'sort') {
+                sorting = value;
             }
             if (key === 'search') {
                 searchParams.push(value);

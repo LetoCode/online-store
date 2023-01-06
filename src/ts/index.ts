@@ -4,7 +4,6 @@ import './handlers/listenSlider';
 import './handlers/listenSorting';
 import './handlers/listenSearch';
 import './handlers/listenViewMode';
-import './view/updateSortView';
 import '../assets/.htaccess';
 import { Products } from './types/types';
 import { updateProducts, updateFiltersView } from './view/updateViewQueryParams';

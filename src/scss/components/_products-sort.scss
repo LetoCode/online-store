@@ -61,6 +61,11 @@
     height: 32px;
     cursor: pointer;
 
+    &._active {
+        box-shadow: 0 0 3px 1px #c45f07;
+        border: 1px solid rgb(235,68,68);
+    }
+
     div {
         width: 100%;
         height: 100%;
