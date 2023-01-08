@@ -11,15 +11,12 @@ body {
    background: rgba(13, 13, 13, 0.8);
    top: 0;
    left: 0;
-
    display: flex;
    align-items: center;
    justify-content: center;
-
    visibility: hidden;
    opacity: 0;
    transition: all 800ms ease 0s;
-
    font-size: 140%;
 
    &._open {
@@ -36,7 +33,6 @@ body {
 
    &__content {
       display: none;
-
       padding: 1%;
       border: 1px solid orange;
       border-radius: 0.5rem;
@@ -44,6 +40,18 @@ body {
       background-color: #181a1c;
       z-index: 99;
       position: absolute;
+
+      @include media-laptop {
+         width: 60%;
+      }
+
+      @include media-tablet {
+         width: 80%;
+      }
+
+      @include media-mobile {
+         width: 95%;
+      }
 
       &._active {
          display: block;
