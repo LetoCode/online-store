@@ -6,11 +6,11 @@
     border-bottom: 1px solid $color-primary;
     background: $color-bg-title;
     font-size: 16px;
+    gap: 10px;
 
     &__select {
         outline: 0;
         border: 0;
-        flex: 1;
         padding: 0 1em;
         color: #fff;
         background-color: #181a1c;
@@ -19,10 +19,20 @@
         color: $color-primary;
         border: 1px solid $color-primary;
         text-align: center;
+        width: 100%;
+
+        @include media-mobile {
+            padding: 0;
+        }
     }
 
     &__found {
         color: $color-additional;
+        white-space: nowrap;
+
+        @include media-mobile {
+            font-size: 14px;
+        }
     }
 
     &__search-input {
@@ -35,6 +45,10 @@
         outline: none;
         font-size: 80%;
         text-align: center;
+
+        @include media-laptop {
+            width: 100%;
+        }
     }
 }
 

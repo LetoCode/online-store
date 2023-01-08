@@ -1,7 +1,10 @@
-.main {
-    &__container {
-        display: flex;
-        padding: 2%;
-        justify-content: space-between;
+.main__container {
+    display: flex;
+    padding: 2%;
+    justify-content: space-between;
+
+    @include media-tablet {
+        flex-direction: column;
+        gap: 15px;
     }
 }
