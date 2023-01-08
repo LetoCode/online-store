@@ -53,6 +53,14 @@ export function handleLocation(event: Event, eventTarget: EventTarget | null = n
                     showCartPage();
                 }
             }
+        } else {
+            const route = getRoute('404');
+            const html: Node = getHTML(route);
+            const main: HTMLElement | null = document.querySelector('.main');
+            if (main) {
+                main.innerHTML = '';
+                main.appendChild(html);
+            }
         }
     }
 }
@@ -60,7 +68,7 @@ export function handleLocation(event: Event, eventTarget: EventTarget | null = n
 function getRoute(href: string): string {
     let result = 'template404';
 
-    if (href[0] === '/' || href.includes('index')) {
+    if (href === '/' || href.includes('index')) {
         result = 'index';
     }
     if (href.includes('id=')) {

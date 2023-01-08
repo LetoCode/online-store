@@ -63,7 +63,7 @@ function inputRangeFilter(event: Event): void {
     checkCountAllProductsAndUpdateCountOnPage();
 }
 
-function createQueryUrlForRange(key: string, value: string): string {
+export function createQueryUrlForRange(key: string, value: string): string {
     const firstURL: string = window.location.href.split('?')[0];
     const search: string = window.location.search;
     let params: URLSearchParams;
@@ -72,6 +72,7 @@ function createQueryUrlForRange(key: string, value: string): string {
         params = new URLSearchParams(search);
     } else {
         params = new URLSearchParams();
+        params.append('index', 'page');
     }
     params.delete(key);
     params.append(key, value);
