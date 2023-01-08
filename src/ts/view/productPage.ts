@@ -79,13 +79,13 @@ function fillBreadcrumb(product: Products): void {
         breadcrumb.append(category);
         category.classList.add('breadcrumb__item');
         category.textContent = product.category;
-        category.href = `/?${product.category}=category`;
+        category.href = `/?index=page&${product.category}=category`;
 
         breadcrumb.innerHTML += `>>`;
         breadcrumb.append(brand);
         brand.classList.add('breadcrumb__item');
         brand.textContent = product.brand;
-        brand.href = `/?${product.brand}=brand`;
+        brand.href = `/?index=page&${product.brand}=brand`;
 
         breadcrumb.innerHTML += `>>`;
         breadcrumb.append(title);

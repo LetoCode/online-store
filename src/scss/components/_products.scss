@@ -10,6 +10,10 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    @include media-tablet {
+        width: 100%;
+    }
 }
 
 .product {
@@ -23,6 +27,9 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+    min-width: 165px;
+    max-width: 310px;
+    flex-grow: 1;
 
     &._big {
         width: 23%;
@@ -36,6 +43,7 @@
         border-bottom: 1px solid $color-primary;
         padding: 5px;
         font-size: 16px;
+        white-space: nowrap;
     }
 
     &__info {

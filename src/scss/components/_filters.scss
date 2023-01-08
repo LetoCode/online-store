@@ -5,39 +5,35 @@
     border-radius: 0.7rem;
     padding: 0.5%;
     height: -moz-fit-content;
-    //height: fit-content;
+
+    @include media-tablet {
+        width: 100%;
+    }
 }
 
 .filters {
-    /* .filters__buttons */
-
     &__buttons {
         display: flex;
         justify-content: space-around;
-        margin-bottom: 5px;
-    }
-
-    /* .filters__container */
-
-    &__container {
+        margin: 10px 0 5px;
+        gap: 5px;
     }
 }
 
 .filters-buttons {
-    /* .filters-buttons__btn */
-
     &__btn {
         background-color: $color-bg-block;
         border: 1px solid $color-primary;
         border-radius: 0.3rem;
         padding: 1% 2%;
-        font-size: 160%;
+        font-size: 1.4rem;
         cursor: pointer;
         text-transform: capitalize;
         color: $color-primary;
         margin-bottom: 10px;
     }
 }
+
 .filter-container {
     &__block {
         &_category {
@@ -77,7 +73,6 @@
 
         &::-webkit-scrollbar {
             width: 5px;
-            // height: 5px;
             background: rgb(245, 218, 159);
         }
 
@@ -94,17 +89,22 @@
             justify-content: space-between;
             padding: 5px 0;
             font-size: 150%;
+            gap: 5px;
 
             label {
                 padding-left: 10px;
             }
+
+            @include media-laptop {
+                font-size: 1.2rem;
+            }
+
+            @include media-tablet {
+                font-size: 1.4rem;
+            }
         }
     }
-
-    /* .filter-container_brand */
 }
-
-//================================range filter =====================================
 
 .range__container {
     margin: 0 auto;
@@ -161,4 +161,13 @@
 #fromSlider-stock {
     height: 0;
     z-index: 1;
+}
+
+.element__input {
+    max-width: 230px;
+    overflow: hidden;
+
+    @include media-tablet {
+        max-width: max-content;
+    }
 }
