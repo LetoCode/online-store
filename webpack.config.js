@@ -14,9 +14,6 @@ const baseConfig = {
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: '[name][ext]',
     },
-    // optimization: {
-    //     minimize: false
-    // },
     module: {
         rules: [
             {
@@ -28,7 +25,7 @@ const baseConfig = {
                 type: 'json',
             },
             {
-                test: /\.(htaccess)$/i,
+                test: /\.(toml)$/i,
                 type: 'asset/resource',
             },
             {
@@ -58,6 +55,10 @@ const baseConfig = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/404.html'),
+            filename: '404.html',
         }),
         new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
         new CleanWebpackPlugin(),

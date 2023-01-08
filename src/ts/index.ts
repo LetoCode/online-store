@@ -4,7 +4,7 @@ import './handlers/listenSlider';
 import './handlers/listenSorting';
 import './handlers/listenSearch';
 import './handlers/listenViewMode';
-import '../assets/.htaccess';
+import '../assets/netlify.toml';
 import { Products } from './types/types';
 import { updateProducts, updateFiltersView } from './view/updateViewQueryParams';
 import { renderAllFilters } from './view/showFiltersView';

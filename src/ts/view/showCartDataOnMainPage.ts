@@ -38,12 +38,8 @@ function showAddToCartInProductList(
 
 function changeBntAddView(btnAdded: HTMLElement, content: string, btnAdd: HTMLElement): void {
     if (content) {
-        console.log('btnAdd before', btnAdd);
-        console.log('btnAdded before', btnAdded);
         btnAdded.classList.add('_active');
         btnAdd.classList.remove('_active');
-        console.log('btnAdd after', btnAdd);
-        console.log('btnAdded after', btnAdded);
     } else {
         btnAdded.classList.remove('_active');
         btnAdd.classList.add('_active');

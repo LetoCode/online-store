@@ -23,8 +23,6 @@ function popupClose(): void {
 
 document.addEventListener('keydown', keyDownEscape);
 
-//+++++++++++++++++++++++++++++++listeners++++++++++++++++++++++++++++++++++++++++++++
-//--------------------------------key Escape------------------------------------------------
 function keyDownEscape(event: Event): void {
     if ((event as KeyboardEvent).code === 'Escape') {
         const popupActive: HTMLElement | null = document.querySelector('.popup._open');
@@ -32,16 +30,13 @@ function keyDownEscape(event: Event): void {
     }
 }
 
-//--------------------------------close popup------------------------------------------------
 function closeThisPopup(event: Event): void {
     if (!(event.target as HTMLElement).closest('.popup__content')) {
         popupClose();
     }
 }
 
-//--------------------------------name------------------------------------------------
 const name: HTMLElement | null = document.getElementById('name');
-
 if (name) {
     name.addEventListener('change', () => {
         checkValidName();
@@ -52,9 +47,7 @@ if (name) {
     });
 }
 
-//--------------------------------phone------------------------------------------------
 const phone: HTMLElement | null = document.getElementById('phone');
-
 if (phone) {
     phone.addEventListener('change', () => {
         checkValidPhone();
@@ -64,7 +57,7 @@ if (phone) {
         removeInvalidClass(event);
     });
 }
-//--------------------------------address------------------------------------------------
+
 const address: HTMLElement | null = document.getElementById('address');
 if (address) {
     address.addEventListener('change', () => {
@@ -75,9 +68,8 @@ if (address) {
         removeInvalidClass(event);
     });
 }
-//--------------------------------email------------------------------------------------
-const email: HTMLElement | null = document.getElementById('email');
 
+const email: HTMLElement | null = document.getElementById('email');
 if (email) {
     email.addEventListener('change', () => {
         checkValidEmail();
@@ -88,7 +80,6 @@ if (email) {
     });
 }
 
-//--------------------------------cart number------------------------------------------------
 const cardNumber: HTMLElement | null = document.getElementById('card-number');
 if (cardNumber) {
     cardNumber.addEventListener('change', () => {
@@ -114,7 +105,6 @@ if (cardNumber) {
     });
 }
 
-//--------------------------------card date------------------------------------------------
 const cardDate: HTMLElement | null = document.getElementById('card-date');
 if (cardDate) {
     cardDate.addEventListener('change', () => {
@@ -139,7 +129,6 @@ if (cardDate) {
     });
 }
 
-//--------------------------------card cvv------------------------------------------------
 const cardCvv: HTMLElement | null = document.getElementById('card-cvv');
 if (cardCvv) {
     cardCvv.addEventListener('change', () => {
@@ -154,7 +143,6 @@ if (cardCvv) {
     });
 }
 
-//--------------------------------sumbmit button------------------------------------------------
 const btnSummit: HTMLElement | null = document.getElementById('submit-purchases');
 const payingSystemLogo: HTMLElement | null = document.getElementById('paying-system-logo');
 if (payingSystemLogo) payingSystemLogo.setAttribute('src', noPaySystemLogo);
@@ -195,7 +183,6 @@ if (btnSummit) {
     });
 }
 
-//+++++++++++++++++++++++++++++++++handlers+++++++++++++++++++++++++++++++++++
 function removeInvalidClass(event: Event): void {
     //remove invalid class if value is empty
     const value: string = (event.target as HTMLInputElement).value;
@@ -227,40 +214,37 @@ function changePayingSystemLogo(firstLetter: string): void {
         if (firstLetter === '6') payingSystemLogo.setAttribute('src', unionPayLogo);
     }
 }
-//---------------------------------name-------------------------------------------
+
 function checkValidName(): boolean {
     const checkingRegExp = /^[a-zа-я]+\s[a-zа-я ]+/i;
     return checkValidity('name', checkingRegExp);
 }
-//--------------------------------phone------------------------------------------------
+
 function checkValidPhone(): boolean {
     const checkingRegExp = /^\+\d{9,}/;
     return checkValidity('phone', checkingRegExp);
 }
-//--------------------------------address------------------------------------------------
+
 function checkValidAddress(): boolean {
     const checkingRegExp = /^[a-zёа-я0-9]{5,}\s[a-zёа-я0-9]{5,}\s[a-zёа-я0-9 ]{5,}/i;
     return checkValidity('address', checkingRegExp);
 }
-//--------------------------------email------------------------------------------------
+
 function checkValidEmail(): boolean {
     const checkingRegExp = /^\w+@[a-zA-Z]+?\.[a-zA-Z.]{2,}/i;
     return checkValidity('email', checkingRegExp);
 }
 
-//--------------------------------card number------------------------------------------------
 function checkValidCardNumber(): boolean {
     const checkingRegExp = /^\d{4} \d{4} \d{4} \d{4}$/;
     return checkValidity('card-number', checkingRegExp);
 }
 
-//--------------------------------card date------------------------------------------------
 function checkValidCardDate(): boolean {
     const checkingRegExp = /^\d{2}\/\d{2}$/;
     return checkValidity('card-date', checkingRegExp);
 }
 
-//--------------------------------card date------------------------------------------------
 function checkValidCardCvv(): boolean {
     const checkingRegExp = /^\d{3}$/;
     return checkValidity('card-cvv', checkingRegExp);
