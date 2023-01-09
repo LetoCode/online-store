@@ -42,7 +42,7 @@ export function showCartPage(): void {
         showEmptyCart(true);
     }
 
-    if (window.location.pathname.includes('buy')) {
+    if (window.location.search.includes('buy')) {
         popupOpen();
     }
 }

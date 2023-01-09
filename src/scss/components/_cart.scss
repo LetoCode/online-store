@@ -27,7 +27,7 @@
       flex-wrap: wrap;
    }
 
-   @include media-tablet{
+   @include media-tablet {
       padding: 2%;
    }
 
@@ -277,6 +277,7 @@
    }
 
    &__body {
+      width: 75%;
       flex: 1 1 75%;
       height: 100%;
       padding: 1%;
@@ -304,6 +305,10 @@
       font-size: 80%;
       text-align: center;
       font-size: 110%;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       @include media-tablet {
          max-height: 34px;

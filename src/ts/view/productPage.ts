@@ -22,7 +22,7 @@ export function fillProductDetails(href: string): void {
             btnBuy.classList.add('btn__product-buy');
             btnBuy.textContent = 'Buy Now';
             btnBuy.addEventListener('click', () => {
-                window.location.href = '/cart&buy';
+                window.location.href = '/?cart&buy';
             });
         }
 
