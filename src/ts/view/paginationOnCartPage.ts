@@ -1,4 +1,5 @@
 import { showCartItems, productsInCart } from './showCartDataOnCartPage';
+import { getStorage } from '../handlers/storage';
 
 export let cartItemsOnPage = 3;
 export let currentPage: number;
@@ -9,6 +10,9 @@ export let end: number;
 export function setPaginationSettings(thisPage = 1): void {
     const rowsValue: string = (document.getElementById('cart-items-on-page') as HTMLInputElement)?.value;
     let rows = 3;
+    const cartLimit: string | null = getStorage('O-S-cartLimit');
+    rows = Number(cartLimit) || rows;
+
     if (rowsValue) {
         rows = +rowsValue;
     }
@@ -23,6 +27,9 @@ export function setPaginationSettings(thisPage = 1): void {
 export function changeCartItemsOnPagePagination(): void {
     const cartPageNumber: HTMLElement | null = document.getElementById('cart-page-number');
     const thisPage = +(cartPageNumber as HTMLInputElement).value;
+    const cartItemsOnPage: HTMLElement | null = document.getElementById('cart-items-on-page');
+    const itemsValue = (cartItemsOnPage as HTMLInputElement).value;
+    localStorage.setItem('O-S-cartLimit', itemsValue);
     setPaginationSettings(thisPage);
     showCartItems();
 }
