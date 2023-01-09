@@ -1,5 +1,5 @@
 import { addBtnListeners, productsArrayRaw } from '../index';
-import { Products } from '../types/types';
+import { images, Products } from '../types/types';
 import { setBtnAdd } from './productsGrid';
 import { restoreCart } from './showCartDataOnMainPage';
 
@@ -36,18 +36,32 @@ export function fillProductDetails(href: string): void {
             const productPrice = document.querySelector('.product__price');
 
             if (productTitle) productTitle.textContent = currProduct.title;
+            if (productImg) {
+                productImg.src = currProduct.thumbnail;
+            }
+
+            const images: images[] = [];
+            currProduct.images.forEach((img) => {
+                const fileSize = getFileSize(img);
+                images.push({
+                    url: img,
+                    fileSize: fileSize,
+                });
+            });
+            const set = new Set();
+            const uniqImages = images.filter((img) => !set.has(img['fileSize']) && set.add(img['fileSize']));
+
             if (productSlides) {
-                currProduct.images.forEach((img) => {
+                uniqImages.forEach((img) => {
                     const productSlide = document.createElement('img');
-                    productSlide.classList.add('product__slide');
                     productSlides.append(productSlide);
-                    productSlide.src = img;
+                    productSlide.classList.add('product__slide');
+                    productSlide.src = img.url;
                     productSlide.addEventListener('click', () => {
-                        if (productImg) productImg.src = img;
+                        if (productImg) productImg.src = img.url;
                     });
                 });
             }
-            if (productImg) productImg.src = currProduct.images[0];
 
             const optionsContent = [
                 currProduct.description,
@@ -91,5 +105,15 @@ function fillBreadcrumb(product: Products): void {
         breadcrumb.append(title);
         title.classList.add('breadcrumb__item');
         title.textContent = product.title;
+    }
+}
+
+function getFileSize(url: string | URL): string | undefined {
+    const req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send();
+    const fileSize = req.getResponseHeader('content-length');
+    if (fileSize) {
+        return fileSize;
     }
 }
