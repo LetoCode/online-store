@@ -32,3 +32,8 @@ export type promoCodesInfo = {
     description: string;
     value: number;
 };
+
+export type images = {
+    url: string;
+    fileSize: string | undefined;
+};

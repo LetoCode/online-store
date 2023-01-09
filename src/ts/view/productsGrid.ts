@@ -32,7 +32,7 @@ export function showProducts(productsArray: Products[], sorting: string, bigMode
             productsItems.append(productItem);
             productItem.classList.add('product');
 
-            const imageBg = product.images[product.images.length - 1];
+            const imageBg = product.thumbnail;
             productItem.style.background = `url(${imageBg}) 0% 0% / cover`;
 
             productItem.append(productTitle);
