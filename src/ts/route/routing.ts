@@ -81,7 +81,7 @@ function getRoute(href: string): string {
 }
 
 function getHTML(route: string): Node {
-    let result: Node = document.createTextNode('div');
+    let result: Node = document.createTextNode(route);
     const template: HTMLTemplateElement | null = document.querySelector(`#${route}`);
     if (template) {
         const templateClone = template.content.cloneNode(true);

@@ -34,6 +34,7 @@ export function windowLoad(): void {
     restoreCart();
     updateFilterFoundView();
     addListeners();
+    showMarksInConsole();
 }
 
 function addListeners(): void {
@@ -118,4 +119,16 @@ export function addBtnListeners(): void {
             });
         });
     }
+}
+
+function showMarksInConsole(): void {
+    console.log(
+        `Страница товаров с фильтрами - 120.
+Страница корзины выбранных товаров - 60.
+Модальное окно оформления(покупки) выбранных товаров - 50.
+Страница с описанием товара - 40.
+Header, содержащий кол-во добавленных в корзину товаров и общую сумму покупок - 20.
+Страница 404 - 10
+ИТОГО 300`
+    );
 }
