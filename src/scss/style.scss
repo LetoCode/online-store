@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+// Abstract
+@import "abstarct/constants";
+@import "abstarct/mixins";
+
+// Base
+@import "base/base";
+@import "base/nullstyle";
+@import "base/buttons";
+
+// Layouts
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/main";
+@import "layouts/404";
+
+// Components
+@import "components/filters";
+@import "components/products";
+@import "components/product-details";
+@import "components/products-sort";
+@import "components/cart";
+@import "components/popup";
