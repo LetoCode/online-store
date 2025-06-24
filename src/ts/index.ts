@@ -20,7 +20,7 @@ import {
     restoreCart,
 } from './view/showCartDataOnMainPage';
 
-export const productsArrayRaw: Products[] = getAllProducts();
+export const productsArrayRaw: Products[ ] = getAllProducts();
 window.addEventListener('DOMContentLoaded', handleLocation);
 window.addEventListener('popstate', handleLocation);
 

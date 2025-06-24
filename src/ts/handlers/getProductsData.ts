@@ -4,7 +4,8 @@ import { productsArrayRaw } from '../index';
 import { filteredProducts } from '../view/updateViewQueryParams';
 
 export function getAllProducts(): Products[] {
-    return Object.values(products)[0];
+    console.log(Object.values(products)[0])
+     return Object.values(products)[0];
 }
 
 export function getProductsWithParams(key: string, value: string[], products: Products[]): Products[] {
