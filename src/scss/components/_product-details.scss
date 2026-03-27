@@ -1,0 +1,134 @@
+.breadcrumb {
+    margin: 3% auto;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    flex-wrap: wrap;
+
+    &__item {
+        text-transform: uppercase;
+        color: $color-additional;
+        font-size: 16px;
+    }
+}
+
+.product {
+    &__container {
+        padding: 2%;
+    }
+
+    &__details {
+        border: 2px solid $color-primary;
+        border-radius: 1rem;
+        background: $color-bg-block;
+        overflow: hidden;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    &__data {
+        display: flex;
+        width: 100%;
+        padding: 2%;
+        justify-content: space-between;
+
+        @include media-tablet {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    &__slides {
+        width: 10%;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include media-tablet {
+            width: 20%;
+        }
+    }
+
+    &__slide {
+        width: 80%;
+        border: 1px solid $color-primary;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+
+    &__photo {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+
+        @include media-tablet {
+            flex-grow: 1;
+        }
+    }
+
+    &__img {
+        max-height: 40vh;
+        width: auto;
+        max-width: 100%;
+        border: 1px solid $color-primary;
+        border-radius: 0.5rem;
+    }
+
+    &__options {
+        width: 40%;
+        margin: 10px;
+
+        @include media-tablet {
+            width: auto;
+            flex-grow: 1;
+        }
+    }
+
+    &__option {
+        margin: 1% auto;
+        border: 1px solid $color-primary;
+        border-radius: 0.3rem;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    &__option-title {
+        text-align: center;
+        background-color: $color-bg-title;
+        padding: .7%;
+    }
+
+    &__option-text {
+        color: $color-additional;
+        padding: .7%;
+    }
+
+    &__price-block {
+        width: 15%;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include media-tablet {
+            width: auto;
+        }
+
+        & > .product__buttons {
+            position: static;
+            display: block;
+            height: auto;
+        }
+    }
+
+    &__price {
+        color: $color-additional;
+        text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
+        text-align: center;
+        font-size: 200%;
+        margin-bottom: 20px;
+    }
+}
